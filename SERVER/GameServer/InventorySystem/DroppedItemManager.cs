@@ -34,7 +34,7 @@ namespace GameServer.InventorySystem
         }
 
         /// <summary>
-        /// 创建掉落物
+        /// Create Drops
         /// </summary>
         /// <returns></returns>
         public DroppedItem NewDroppedItem(int itemId, Vector3 pos, Vector3 dire, int amount)
@@ -53,8 +53,8 @@ namespace GameServer.InventorySystem
 
         public DroppedItem NewDroppedItemWithOffset(int itemId, Vector3 pos, Vector3 dire, int amount, float offset)
         {
-            
-            // 位置偏移掉落
+
+            // Position offset and drop
             float offsetX = _random.NextSingle() * offset * 2 - offset;
             float offsetZ = _random.NextSingle() * offset * 2 - offset;
 
@@ -65,7 +65,7 @@ namespace GameServer.InventorySystem
         }
 
         /// <summary>
-        /// 删除掉落物
+        /// Delete drops
         /// </summary>
         /// <param name="player"></param>
         public void RemoveDroppedItem(DroppedItem item)

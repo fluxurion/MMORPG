@@ -27,7 +27,7 @@ namespace MMORPG.Common.Tool
         private int[] _indexArr;
 
         private long _lastMs;
-        private int _tickMs;  // 最小槽的时间范围，毫秒单位
+        private int _tickMs;  // The minimum slot time range, in milliseconds
 
         private bool _stop;
 
@@ -80,7 +80,7 @@ namespace MMORPG.Common.Tool
                     _backupRemoveList.Clear();
                 }
 
-                // 根据上次循环至今经过的时间，逐格推进
+                // Advances the time frame by frame based on the time elapsed since the last cycle.
                 var nowMs = DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond / _tickMs;
                 var duration = nowMs - _lastMs;
                 for (int i = 0; i < duration; i++)
@@ -102,7 +102,7 @@ namespace MMORPG.Common.Tool
                         _slot[_indexArr[0]].Clear();
                     }
 
-                    // 如果需要向上层时间轮推进，则将上层时间轮的队列向下派发
+                    // If it is necessary to advance to the upper time wheel, the queue of the upper time wheel will be dispatched downwards
                     int j = 0;
                     ++_indexArr[0];
                     do
@@ -148,14 +148,14 @@ namespace MMORPG.Common.Tool
             {
                 var next = task.Next;
 
-                // 根据时长插入对应的槽中
+                // Insert into the corresponding slot according to the duration
                 int tick = task.Value.Tick;
 
                 int layer = GetLayerByTick(tick);
                 int index = tick & 0x3f;
                 index = layer * SlotCount + ((index + _indexArr[layer]) % SlotCount);
 
-                // 清除在当前层的时长，在下次向下派发时可以插入到下层
+                // Clear the duration of the current layer so that it can be inserted into the next layer when it is dispatched downwards next time
                 int mask2 = ~(0x7fffffff << (layer * 6));
                 task.ValueRef.Tick &= mask2;
 
@@ -167,8 +167,8 @@ namespace MMORPG.Common.Tool
         }
 
         /// <summary>
-        /// 异步追加延时任务到时间轮中
-        /// 不可修改返回的task
+        /// Asynchronously append a delayed task to the timer.
+        /// The returned task cannot be modified.
         /// </summary>
         public TimeTask AddTask(int ms, Action<TimeTask> action)
         {
@@ -189,7 +189,7 @@ namespace MMORPG.Common.Tool
         }
 
         /// <summary>
-        /// 异步删除延时任务
+        /// Asynchronously delete delayed tasks
         /// </summary>
         /// <param name="task"></param>
         public void RemoveTask(TimeTask task)

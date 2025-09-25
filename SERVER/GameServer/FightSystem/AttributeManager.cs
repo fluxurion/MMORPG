@@ -7,7 +7,7 @@ namespace GameServer.FightSystem
     public class AttributeManager
     {
         public AttributeData Basic { get; private set; } = new();   // 基础总和
-        public AttributeData Equip { get; private set; } = new();   // 装备总和
+        public AttributeData Equip { get; private set; } = new();   // equipment总和
         public AttributeData Buff { get; private set; } = new();    // buff总和
         public AttributeData Final { get; private set; } = new();   // 最终总和
         public Actor OwnerActor { get; private set; }
@@ -61,7 +61,7 @@ namespace GameServer.FightSystem
             Basic.Add(initial);
             Basic.Add(growth);
 
-            // 装备和buff
+            // equipment和buff
 
             Final.Add(Basic);
             Final.Add(Equip);

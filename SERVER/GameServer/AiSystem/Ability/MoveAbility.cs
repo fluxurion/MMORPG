@@ -32,7 +32,7 @@ namespace GameServer.AiSystem.Ability
         public override void Update()
         {
             var actor = Entity as Actor;
-            // 如果不可移动
+            // if immovable
             if (actor != null && 
                 (actor.FlagState & FlagStates.Root) == FlagStates.Root || 
                 (actor.FlagState & FlagStates.Stun) == FlagStates.Stun)
@@ -42,14 +42,14 @@ namespace GameServer.AiSystem.Ability
 
             if (!LockDirection)
             {
-                // 面朝目标实体
+                // Facing the target entity
                 if (LookAtTarget != null)
                 {
                     var direction = (LookAtTarget.Position - Entity.Position);
                     Entity.Direction.Y = direction.ToEulerAngles();
                 }
 
-                // 面朝移动方向
+                // Facing the direction of movement
                 if (LookAtMoveDirection)
                 {
                     Entity.Direction.Y = (_destination - Entity.Position).ToEulerAngles();
@@ -61,7 +61,7 @@ namespace GameServer.AiSystem.Ability
                 _destination,
                 Speed * Time.DeltaTime);
 
-            // 力的衰减
+            // Attenuation of force
             var friction = Entity.Map.Define.Friction * Time.DeltaTime;
             var forceLen = _force.Length();
 

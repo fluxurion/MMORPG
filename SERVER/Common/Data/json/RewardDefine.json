@@ -1,16 +1,16 @@
 {
   "1": {
     "ID": 1,
-    "Name": "哥布林指骨",
+    "Name": "Goblin Finger Bones",
     "Type": "DropItem",
-    "Decs": "哥布林指骨",
+    "Decs": "Goblin Finger Bones",
     "RewardList": "[{\"ItemId\":1008, \"Number\":1, \"Probability\":1}, {\"ItemId\":1008, \"Number\":1, \"Probability\":1}]"
   },
   "2": {
     "ID": 2,
-    "Name": "哥布林任务奖励",
+    "Name": "Goblin Quest Rewards",
     "Type": "Buff",
-    "Decs": "哥布林任务奖励",
+    "Decs": "Goblin Quest Rewards",
     "RewardList": "[{\"BuffId\":1001, \"Probability\":1}]"
   }
 }

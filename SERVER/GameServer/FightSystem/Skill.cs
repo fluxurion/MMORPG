@@ -23,10 +23,10 @@ namespace GameServer.FightSystem
         public enum Stage
         {
             Idle = 0,
-            Ready,  // 就绪
-            Intonate,   // 吟唱
-            Active,     // 已激活
-            Cooling,   // 冷却中
+            Ready,  // ready
+            Intonate,   // chant
+            Active,     // Activated
+            Cooling,   // Cooling down
         }
 
         public Actor OwnerActor { get; }
@@ -74,29 +74,29 @@ namespace GameServer.FightSystem
             {
                 _timeCounter += Time.DeltaTime;
             }
-            
 
-            // 如果是吟唱阶段并且吟唱已经结束
+
+            // If it is the chanting phase and the chanting has ended
             if (CurrentStage == Stage.Intonate && _timeCounter >= Define.IntonateTime)
             {
                 OnActive();
             }
 
-            // 如果是技能激活阶段
+            // If it is the skill activation stage
             if (CurrentStage == Stage.Active)
             {
                 OnRun();
                 if (CurrentStage == Stage.Cooling)
                 {
-                    // 技能释放完成
+                    // Skill release completed
                     OnFinish();
                 }
             }
 
-            // 如果是技能冷却阶段
+            // If it is the skill cooling phase
             if (CurrentStage == Stage.Cooling && _timeCounter >= Define.Cd)
             {
-                // 技能冷却完成
+                // Skill cooldown completed
                 OnCoolingEnded();
             } 
         }
@@ -149,13 +149,13 @@ namespace GameServer.FightSystem
         }
 
         /// <summary>
-        /// 技能激活
+        /// Skill activation
         /// </summary>
         private void OnActive()
         {
             CurrentStage = Stage.Active;
 
-            // 技能激活
+            // Skill activation
             _timeCounter -= Define.IntonateTime;
 
             if (Define.MissileUnitId != 0)
@@ -177,7 +177,7 @@ namespace GameServer.FightSystem
         }
 
         /// <summary>
-        /// 技能每帧运行
+        /// Skills run every frame
         /// </summary>
         private void OnRun()
         {
@@ -186,7 +186,7 @@ namespace GameServer.FightSystem
                 if (_timeCounter >= HitDelay[_hitDelayIndex])
                 {
                     _timeCounter -= HitDelay[_hitDelayIndex];
-                    // 命中延迟触发
+                    // Hit delay trigger
                     OnHit(_castTarget);
                     ++_hitDelayIndex;
                 }
@@ -244,7 +244,7 @@ namespace GameServer.FightSystem
 
         private DamageInfo CauseDamage(Actor target)
         {
-            // 伤害 = 攻击 × (1 - 护甲 / (护甲 + 400 ＋ 85 × 等级))
+            // Damage = Attack × (1 - Armor / (Armor + 400 + 85 × Level))
             var a = OwnerActor.AttributeManager.Final;
             var b = target.AttributeManager.Final;
             var amount = 0f;
@@ -298,7 +298,7 @@ namespace GameServer.FightSystem
         }
 
         /// <summary>
-        /// 技能释放完成
+        /// Skill release completed
         /// </summary>
         private void OnFinish()
         {
@@ -306,7 +306,7 @@ namespace GameServer.FightSystem
         }
 
         /// <summary>
-        /// 技能冷却完成
+        /// Skill cooldown completed
         /// </summary>
         private void OnCoolingEnded()
         {

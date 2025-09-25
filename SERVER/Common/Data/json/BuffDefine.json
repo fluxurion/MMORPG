@@ -1,7 +1,7 @@
 {
   "1": {
     "ID": 1,
-    "Name": "治愈圣水Buff",
+    "Name": "Healing Holy Water Buff",
     "Decs": "",
     "Type": "Attribute",
     "Duration": 0,
@@ -9,7 +9,7 @@
   },
   "2": {
     "ID": 2,
-    "Name": "晕眩Buff测试",
+    "Name": "Stun Buff Test",
     "Decs": "",
     "Type": "State",
     "Duration": 5,
@@ -17,7 +17,7 @@
   },
   "1001": {
     "ID": 1001,
-    "Name": "哥布林任务经验",
+    "Name": "Goblin quest experience",
     "Decs": "",
     "Type": "Attribute",
     "Duration": 0,

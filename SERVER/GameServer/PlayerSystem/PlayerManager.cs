@@ -18,8 +18,8 @@ using GameServer.UserSystem;
 namespace GameServer.PlayerSystem
 {
     /// <summary>
-    /// 角色管理器
-    /// 负责管理地图内的所有玩家
+    /// Character Manager
+    /// Responsible for managing all players in the map
     /// </summary>
     public class PlayerManager
     {
@@ -67,7 +67,7 @@ namespace GameServer.PlayerSystem
 
 
         /// <summary>
-        /// 创建玩家
+        /// Create player
         /// </summary>
         /// <returns></returns>
         public Player NewPlayer(User user, DbCharacter dbCharacter, Vector3 pos, Vector3 dire)
@@ -85,7 +85,7 @@ namespace GameServer.PlayerSystem
         }
 
         /// <summary>
-        /// 删除玩家
+        /// delete player
         /// </summary>
         /// <param name="player"></param>
         public void RemovePlayer(Player player)
@@ -97,8 +97,8 @@ namespace GameServer.PlayerSystem
         }
 
         /// <summary>
-        /// 将消息广播给能够观察到sender的玩家，排除sender
-        /// 没有sender则为全图广播
+        /// Broadcast the message to players who can see the sender, excluding the sender.
+        /// If there is no sender, broadcast to the entire map.
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="sender"></param>

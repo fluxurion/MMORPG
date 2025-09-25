@@ -110,7 +110,7 @@ namespace GameServer.EntitySystem
             DamageSourceInfo = info;
             Map.PlayerManager.Broadcast(new EntityHurtResponse{ Info = info }, this, true, false);
             ChangeHp(-info.Amount);
-            Log.Debug($"{this}受到{info.AttackerInfo.AttackerId}的{info.AttackerInfo.AttackerType}攻击, 扣除{info.Amount}血量, 剩余血量:{Hp}!");
+            Log.Debug($"{this}receive{info.AttackerInfo.AttackerId}of{info.AttackerInfo.AttackerType}attack, deduct{info.Amount}HP, Remaining blood volume:{Hp}!");
         }
         
         protected void EntityAttributeEntrySync<T>(EntityAttributeEntryType type, T value)
@@ -151,7 +151,7 @@ namespace GameServer.EntitySystem
                     entry.String = stringVal;
                     break;
                 default:
-                    Log.Error("[Actor.SyncAttributeEntry]无效的类型");
+                    Log.Error("[Actor.SyncAttributeEntry]Invalid type");
                     break;
             }
             return entry;

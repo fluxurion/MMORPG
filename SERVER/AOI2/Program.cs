@@ -6,19 +6,19 @@ using System.Security.Principal;
 
 namespace Aoi
 {
-    /// 优化的九宫格Aoi系统
+    /// Optimized Nine-Grid Aoi system
 
-    /// 频繁跨边界的优化方案：
+    /// Optimization solutions for frequent boundary crossings:
     /// | |c| | |
     /// | | |b| | |
     ///   | | |a| |
     ///     | | | |
-    /// 如此处从a移动到b，并不立刻移除a在下方和右侧的5个格子(保留依据为格子距离<=1)
-    /// 此时如果b再移动到c，再将这5个格子距离>1的格子移除，这样最坏情况下是16个格子，但基本避免了频繁跨边界导致的广播进入、离开的问题
-    
+    /// If we move from a to b, we do not immediately remove the 5 grids below and to the right of a (the retention basis is grid distance <= 1).
+    /// At this time, if b moves to c again, the 5 grids with a distance > 1 are removed. In this way, the worst case is 16 grids, but the problem of broadcast entry and exit caused by frequent cross-border is basically avoided.
 
 
-internal class Program
+
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ internal class Program
 
             Dictionary<int, AoiWord.AoiEntity> dir = new();
 
-            // 添加玩家
+            // add player
             int count = 3;
             for (var i = 1; i <= count; i++)
             {
@@ -97,7 +97,7 @@ internal class Program
                 //    Console.WriteLine($"entity:{aoiKey} X:{x}, Y:{y}");
                 //}
             }
-            // 测试移动。
+            // Test move.
             // while (true)
             // {
             //     Console.WriteLine("1");
@@ -107,11 +107,11 @@ internal class Program
 
 
 
-            //// 刷新key为3的信息。
+            //// Refresh the information with key 3.
 
             //zone.Refresh(3, area, out var enters);
 
-            //Console.WriteLine("---------------加入玩家范围的玩家列表--------------");
+            //Console.WriteLine("---------------List of players that have joined the player scope--------------");
 
             //foreach (var aoiKey in enters)
             //{
@@ -119,12 +119,12 @@ internal class Program
             //    Console.WriteLine($"X:{findEntity.X.Value} Y:{findEntity.Y.Value}");
             //}
 
-            //// 更新key为3的坐标。
+            //// Update the coordinates of key 3.
 
             //var entity = zone.Refresh(3, 1, 3, area, out enters);
 
 
-            //Console.WriteLine("---------------离开玩家范围的玩家列表--------------");
+            //Console.WriteLine("---------------List of players who have left player range--------------");
 
             //foreach (var aoiKey in entity.Leave)
             //{
@@ -132,7 +132,7 @@ internal class Program
             //    Console.WriteLine($"X:{findEntity.X.Value} Y:{findEntity.Y.Value}");
             //}
 
-            //Console.WriteLine("---------------进入玩家范围的玩家列表--------------");
+            //Console.WriteLine("---------------List of players entering the player range--------------");
 
             //foreach (var aoiKey in entity.Enter)
             //{

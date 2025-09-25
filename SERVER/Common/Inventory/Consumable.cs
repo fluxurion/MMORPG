@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MMORPG.Common.Inventory
 {
     /// <summary>
-    /// 消耗品
+    /// Consumables
     /// </summary>
     public class Consumable : Item
     {

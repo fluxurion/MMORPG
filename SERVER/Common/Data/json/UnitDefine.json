@@ -1,10 +1,10 @@
 {
   "1": {
     "ID": 1,
-    "Name": "剑士",
+    "Name": "swordsman",
     "Resource": "HeroKnightMale Melee",
     "Kind": "Player",
-    "Decs": "近战物理系",
+    "Decs": "Melee Physical",
     "Speed": 5,
     "MaxHp": 500,
     "MaxMp": 300,
@@ -35,7 +35,7 @@
   },
   "1005": {
     "ID": 1005,
-    "Name": "地精男战士",
+    "Name": "Goblin male warrior",
     "Resource": "Goblin Warrior Male",
     "Kind": "Monster",
     "Decs": "",
@@ -69,7 +69,7 @@
   },
   "1006": {
     "ID": 1006,
-    "Name": "骷髅小兵",
+    "Name": "Skeleton Minions",
     "Resource": "Character_Skeleton_Slave_01",
     "Kind": "Monster",
     "Decs": "",
@@ -103,7 +103,7 @@
   },
   "1007": {
     "ID": 1007,
-    "Name": "骷髅骑士",
+    "Name": "Skeleton Knight",
     "Resource": "Character_Skeleton_Knight",
     "Kind": "Monster",
     "Decs": "",
@@ -137,7 +137,7 @@
   },
   "2001": {
     "ID": 2001,
-    "Name": "铁匠达萨贝",
+    "Name": "Blacksmith Dasabe",
     "Resource": "Blacksmith Male",
     "Kind": "Npc",
     "Decs": "",
@@ -171,10 +171,10 @@
   },
   "4001001": {
     "ID": 4001001,
-    "Name": "传送门",
+    "Name": "portal",
     "Resource": "",
     "Kind": "Gate",
-    "Decs": "黄色传送门",
+    "Decs": "yellow portal",
     "Speed": 0,
     "MaxHp": 0,
     "MaxMp": 0,
@@ -205,10 +205,10 @@
   },
   "1001001": {
     "ID": 1001001,
-    "Name": "治愈圣水",
+    "Name": "healing holy water",
     "Resource": "SM_Item_Potion_01",
     "Kind": "DroppedItem",
-    "Decs": "生命泉涌中的生命圣水稀释而来，对伤势一定的治疗效果。",
+    "Decs": "The diluted holy water of life in the fountain of life has a certain healing effect on injuries.",
     "Speed": 0,
     "MaxHp": 0,
     "MaxMp": 0,
@@ -239,10 +239,10 @@
   },
   "1001002": {
     "ID": 1001002,
-    "Name": "魔力药剂",
+    "Name": "Magic Potion",
     "Resource": "SM_Item_Potion_06",
     "Kind": "DroppedItem",
-    "Decs": "生命泉涌中的生命圣水稀释而来，对伤势一定的治疗效果。",
+    "Decs": "The diluted holy water of life in the fountain of life has a certain healing effect on injuries.",
     "Speed": 0,
     "MaxHp": 0,
     "MaxMp": 0,
@@ -273,7 +273,7 @@
   },
   "1002001": {
     "ID": 1002001,
-    "Name": "龙钢战刃",
+    "Name": "Dragonsteel Glaive",
     "Resource": "SM_Wep_Ornate_Sword_02",
     "Kind": "DroppedItem",
     "Decs": "",
@@ -307,7 +307,7 @@
   },
   "1002002": {
     "ID": 1002002,
-    "Name": "哥布林指骨",
+    "Name": "Goblin Finger Bones",
     "Resource": "SM_Item_Bones",
     "Kind": "DroppedItem",
     "Decs": "",

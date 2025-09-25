@@ -13,8 +13,8 @@ using GameServer.Manager;
 namespace GameServer.MonsterSystem
 {
     /// <summary>
-    /// 怪物管理器
-    /// 负责管理地图内的所有怪物
+    /// monster manager
+    /// Responsible for managing all monsters in the map
     /// </summary>
     public class MonsterManager
     {

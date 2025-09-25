@@ -17,7 +17,7 @@ using MMORPG.Common.Tool;
 namespace GameServer.EntitySystem
 {
     /// <summary>
-    /// 实体生成器
+    /// Entity generator
     /// </summary>
     public class Spawner
     {
@@ -25,8 +25,8 @@ namespace GameServer.EntitySystem
         public SpawnDefine SpawnDefine;
         public Actor? Actor;
 
-        private bool _reviving;      // 复活中
-        private float _reviveTime;   // 复活时间
+        private bool _reviving;      // Resurrecting
+        private float _reviveTime;   // resurrection time
 
         public Spawner(SpawnManager manager, SpawnDefine define)
         {
@@ -68,7 +68,7 @@ namespace GameServer.EntitySystem
 
 
     /// <summary>
-    /// 实体生成管理器
+    /// Entity Generation Manager
     /// </summary>
     public class SpawnManager
     {

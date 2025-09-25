@@ -13,8 +13,8 @@ namespace GameServer.MapSystem
 {
 
     /// <summary>
-    /// 地图管理器
-    /// 负责管理游戏的所有地图
+    /// map manager
+    /// Responsible for managing all maps of the game
     /// </summary>
     public class MapManager : Singleton<MapManager>
     {
@@ -28,7 +28,7 @@ namespace GameServer.MapSystem
         {
             foreach (var mapDefine in DataManager.Instance.MapDict.Values)
             {
-                Log.Information($"加载地图：{mapDefine.Name}");
+                Log.Information($"Load map：{mapDefine.Name}");
                 NewMap(mapDefine);
             }
         }

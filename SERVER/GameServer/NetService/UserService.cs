@@ -10,7 +10,7 @@ using GameServer.Manager;
 
 namespace GameServer.NetService
 {
-    // 可能有逻辑仍需要加锁
+    // There may be logic that still needs to be locked
     public class UserService : ServiceBase<UserService>
     {
         private static readonly object _loginLock = new();
@@ -32,24 +32,24 @@ namespace GameServer.NetService
             });
         }
 
-        // TODO:校验用户名、密码的合法性(长度等)
+        // TODO: Verify the legitimacy of username and password (length, etc.)
         public void OnHandle(NetChannel sender, LoginRequest request)
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}登录请求: Username={request.Username}, Password={request.Password}");
+                Log.Debug($"{sender}Login request: Username={request.Username}, Password={request.Password}");
                 
                 if (sender.User != null)
                 {
                     sender.Send(new LoginResponse() { Error = NetError.UnknowError });
-                    Log.Debug($"{sender}登录失败：用户已登录");
+                    Log.Debug($"{sender}Login failed: User already logged in");
                     return;
                 }
 
                 if (UserManager.Instance.GetUserByName(request.Username) != null)
                 {
                     sender.Send(new LoginResponse() { Error = NetError.LoginConflict });
-                    Log.Debug($"{sender}登录失败：账号已在别处登录");
+                    Log.Debug($"{sender}Login failed: The account has been logged in elsewhere");
                     return;
                 }
 
@@ -60,7 +60,7 @@ namespace GameServer.NetService
                 if (dbUser == null)
                 {
                     sender.Send(new LoginResponse() { Error = NetError.IncorrectUsernameOrPassword });
-                    Log.Debug($"{sender}登录失败：账号或密码错误");
+                    Log.Debug($"{sender}Login failed: Account or password incorrect");
                     return;
                 }
 
@@ -68,7 +68,7 @@ namespace GameServer.NetService
             
 
                 sender.Send(new LoginResponse() { Error = NetError.Success });
-                Log.Debug($"{sender}登录成功");
+                Log.Debug($"{sender}Login successful");
             });
         }
 
@@ -76,18 +76,18 @@ namespace GameServer.NetService
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}注册请求: Username={request.Username}, Password={request.Password}");
+                Log.Debug($"{sender}Registration request: Username={request.Username}, Password={request.Password}");
                 if (sender.User != null)
                 {
                     sender.Send(new RegisterResponse() { Error = NetError.UnknowError });
-                    Log.Debug($"{sender}注册失败：用户已登录");
+                    Log.Debug($"{sender}Registration failed: User already logged in");
                     return;
                 }
 
                 if (!StringHelper.NameVerify(request.Username))
                 {
                     sender.Send(new RegisterResponse() { Error = NetError.IllegalUsername });
-                    Log.Debug($"{sender}注册失败：用户名非法");
+                    Log.Debug($"{sender}Registration failed: invalid username");
                     return;
                 }
 
@@ -97,7 +97,7 @@ namespace GameServer.NetService
                 if (dbUser != null)
                 {
                     sender.Send(new RegisterResponse() { Error = NetError.RepeatUsername });
-                    Log.Debug($"{sender}注册失败：用户名已被注册");
+                    Log.Debug($"{sender}Registration failed: Username has already been registered");
                     return;
                 }
 
@@ -106,12 +106,12 @@ namespace GameServer.NetService
                 if (insertCount <= 0)
                 {
                     sender.Send(new RegisterResponse() { Error = NetError.UnknowError });
-                    Log.Debug($"{sender}注册失败：数据库错误");
+                    Log.Debug($"{sender}Registration failed: Database error");
                     return;
                 }
 
                 sender.Send(new RegisterResponse() { Error = NetError.Success });
-                Log.Debug($"{sender}注册成功");
+                Log.Debug($"{sender}Registration successful");
                 
             });
         }
@@ -120,7 +120,7 @@ namespace GameServer.NetService
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}发送心跳请求");
+                Log.Debug($"{sender}Sending a heartbeat request");
                 //sender.Send(new HeartBeatResponse() { }, null);
             });
         }

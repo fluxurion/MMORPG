@@ -35,16 +35,16 @@ namespace GameServer.NetService
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}进入游戏请求");
+                Log.Debug($"{sender}Enter game request");
                 if (sender.User == null)
                 {
-                    Log.Debug($"{sender}进入游戏失败：用户未登录");
+                    Log.Debug($"{sender}Failed to enter the game: User not logged in");
                     return;
                 }
 
                 if (sender.User.Player != null)
                 {
-                    Log.Debug($"{sender}进入游戏失败：重复进入");
+                    Log.Debug($"{sender}Failed to enter the game: Repeated entry");
                     return;
                 }
 
@@ -55,7 +55,7 @@ namespace GameServer.NetService
                 if (dbCharacter == null)
                 {
                     sender.Send(new JoinMapResponse() { Error = NetError.InvalidCharacter });
-                    Log.Debug($"{sender}进入游戏失败：数据库中不存在指定的角色");
+                    Log.Debug($"{sender}Failed to enter the game: The specified character does not exist in the database");
                     return;
                 }
 
@@ -63,7 +63,7 @@ namespace GameServer.NetService
                 if (map == null)
                 {
                     sender.Send(new JoinMapResponse() { Error = NetError.InvalidMap });
-                    Log.Debug($"{sender}进入游戏失败：指定的地图不存在");
+                    Log.Debug($"{sender}Failed to enter the game: The specified map does not exist");
                     return;
                 }
 
@@ -85,7 +85,7 @@ namespace GameServer.NetService
                     Actor = player.ToNetActor(),
                 };
                 sender.Send(res, null);
-                Log.Debug($"{sender}进入游戏成功");
+                Log.Debug($"{sender}Enter the game successfully");
             });
         }
 

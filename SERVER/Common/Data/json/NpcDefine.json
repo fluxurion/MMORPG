@@ -1,9 +1,9 @@
 {
   "1": {
     "ID": 1,
-    "Name": "铁匠达萨贝",
+    "Name": "Blacksmith Dasabe",
     "UnitId": 2001,
-    "Decs": "铁匠",
+    "Decs": "blacksmith",
     "StartDialogueId": 1
   }
 }

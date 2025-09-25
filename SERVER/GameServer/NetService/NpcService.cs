@@ -47,7 +47,7 @@ namespace GameServer.NetService
                 };
                 if (npc == null)
                 {
-                    // 查找距离最近的Npc
+                    // Find the nearest NPC
                     var entity =
                         player.Map.GetEntityFollowingNearest(player, entity => entity.EntityType == EntityType.Npc);
                     do
@@ -76,7 +76,7 @@ namespace GameServer.NetService
 
                 if (player.CurrentDialogueId == 0)
                 {
-                    // 需要结束对话
+                    // need to end conversation
                     res.DialogueId = 0;
                     player.InteractingNpc = null;
                     sender.Send(res, null);
@@ -92,16 +92,16 @@ namespace GameServer.NetService
 
                     if (req.SelectIdx < 0 || req.SelectIdx > options.Length)
                     {
-                        Log.Error("客户端传入了错误的对话选择索引");
+                        Log.Error("The client passed in an incorrect dialogue selection index.");
                         return;
                     }
 
-                    // 选择了某项，将该项的跳转告知客户端
+                    // Select an item and inform the client of the jump to that item
                     dialogueDefine = DataManager.Instance.DialogueDict[options[req.SelectIdx - 1]];
                     player.CurrentDialogueId = dialogueDefine.Jump;
                     if (player.CurrentDialogueId == 0)
                     {
-                        // 选项没有可继续跳转的对话，结束
+                        // There is no dialog to jump to, end
                         res.DialogueId = 0;
                         player.InteractingNpc = null;
                         sender.Send(res, null);
@@ -114,7 +114,7 @@ namespace GameServer.NetService
                 bool next = true;
                 if (dialogueDefine.AcceptTask != "")
                 {
-                    // 接取任务
+                    // Take mission
                     var tmp = JsonConvert.DeserializeObject<int[]>(dialogueDefine.AcceptTask);
                     if (!player.TaskManager.AcceptTask(tmp[0]))
                     {
@@ -126,7 +126,7 @@ namespace GameServer.NetService
                 
                 if (dialogueDefine.SubmitTask != "")
                 {
-                    // 提交任务
+                    // Submit task
                     var tmp = JsonConvert.DeserializeObject<int[]>(dialogueDefine.SubmitTask);
                     if (!player.TaskManager.SubmitTask(tmp[0]))
                     {
@@ -140,7 +140,7 @@ namespace GameServer.NetService
                 {
                     dialogueDefine = DataManager.Instance.DialogueDict[player.CurrentDialogueId];
                 }
-                // 如果需要保存当前的对话进度
+                // If you need to save the current conversation progress
                 if (dialogueDefine.SaveDialogueId != 0)
                 {
                     player.DialogueManager.SaveDialogueId(npc.NpcDefine.ID, dialogueDefine.SaveDialogueId);
@@ -148,7 +148,7 @@ namespace GameServer.NetService
 
                 if (next)
                 {
-                    // 转到下一段对话
+                    // Go to the next conversation
                     player.CurrentDialogueId = dialogueDefine.Jump;
                 }
 
@@ -157,12 +157,12 @@ namespace GameServer.NetService
                 {
                     if (dialogueDefine.Options.Any())
                     {
-                        // 是选择项对话，等待选择
+                        // It is a selection dialog, waiting for selection
                         player.CurrentDialogueId = res.DialogueId;
                     }
                     else
                     {
-                        // 需要结束对话，等待下一次停止响应时停止
+                        // Need to end the conversation and wait for the next stop response
                         // player.InteractingNpc = null;
                         player.CurrentDialogueId = 0;
                     }

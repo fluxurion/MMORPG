@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace Aoi
 {
     /// <summary>
-    /// 基于九宫格的AOI系统
-    /// 非线程安全
+    /// AOI system based on the Nine-square grid
+    /// Not thread safe
     /// </summary>
     public class AoiWord
     {
@@ -24,27 +24,27 @@ namespace Aoi
         {
             public int EntityId;
             public UInt64 ZoneKey;
-            // 间距为2的待清理区域
+            // Areas to be cleaned with a spacing of 2
             public HashSet<UInt64> PendingZoneKeySet = new();
-            // 特别关注目标
+            // Pay special attention to the target
             //public HashSet<int> SpecialFollowingSet = new();
         }
 
         public class AoiZone
         {
-            // 当前区域内的所有实体
+            // All entities in the current area
             public HashSet<int> EntitySet = new();
 
-            // 在Pending中关注该区域的所有实体，即哪些实体的Pending中有当前区域
+            // Pay attention to all entities in the region in Pending, that is, which entities have the current region in Pending
             public HashSet<int> PendingEntitySet = new();
 
-            // 实体进入当前Zone
+            // The entity enters the current zone
             public void Enter(AoiEntity aoiEntity)
             {
                 EntitySet.Add(aoiEntity.EntityId);
             }
 
-            // 实体离开当前Zone
+            // The entity leaves the current zone
             public void Leave(AoiEntity aoiEntity)
             {
                 EntitySet.Remove(aoiEntity.EntityId);
@@ -95,14 +95,14 @@ namespace Aoi
         }
 
         /// <summary>
-        /// 返回是否跨越边界
+        /// Returns whether the boundary is crossed
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="newPos"></param>
-        /// <param name="enterFollowingList">返回刷新后进入当前实体视距的实体列表</param>
-        /// <param name="leaveFollowingList">返回刷新后离开当前实体视距的实体列表</param>
-        /// <param name="enterFollowerList">返回刷新后当前实体会进入哪些实体视距的实体列表</param>
-        /// <param name="leaveFollowerList">返回刷新后当前实体会离开哪些实体视距的实体列表</param>
+        /// <param name="enterFollowingList">Returns a list of entities that have entered the current entity's view range after refresh.</param>
+        /// <param name="leaveFollowingList">Returns a list of entities that have left the current entity's view range since the refresh.</param>
+        /// <param name="enterFollowerList">Returns a list of entities whose line of sight the current entity will enter after refreshing</param>
+        /// <param name="leaveFollowerList">Returns a list of entities whose sight distance the current entity will leave after refreshing</param>
         /// <returns></returns>
         public bool Refresh(AoiEntity aoiEntity, float x, float y, 
             Action<int> enterFollowingCallback, Action<int> leaveFollowingCallback, 
@@ -118,7 +118,7 @@ namespace Aoi
             {
                 PointToZonePoint(x, y, out var newZoneX, out var newZoneY);
 
-                //Console.WriteLine($"实体{aoiEntity.EntityId}PendingZone：");
+                //Console.WriteLine($"entity{aoiEntity.EntityId}PendingZone：");
                 //foreach (var pendingZoneKey in aoiEntity.PendingZoneKeySet)
                 //{
                 //    ZoneKeyToZonePoint(pendingZoneKey, out var pendingZoneX, out var pendingZoneY);
@@ -126,19 +126,19 @@ namespace Aoi
                 //}
                 //Console.WriteLine();
                 //Console.WriteLine();
-                //Console.WriteLine($"实体{aoiEntity.EntityId}跨边界移动：[{minX}, {minY}] -> [{newZoneX}, {newZoneY}]");
+                //Console.WriteLine($"entity{aoiEntity.EntityId}moving across borders：[{minX}, {minY}] -> [{newZoneX}, {newZoneY}]");
 
                 ZonePointToZoneKey(newZoneX, newZoneY, out var newZoneKey);
                 ZoneKeyToZonePoint(oldZoneKey, out var oldZoneX, out var oldZoneY);
                 var oldZone = _zoneDict[oldZoneKey];
                 var newZone = CreateZone(newZoneKey);
 
-                // 我可能会进入一些实体的PendingZone，甚至是自己的PendingZone
+                // I might enter some entity's PendingZone, or even my own PendingZone
                 foreach (var pendingEntityId in newZone.PendingEntitySet)
                 {
                     if (pendingEntityId == aoiEntity.EntityId) continue;
                     var pendingEntity = _entittDict[pendingEntityId];
-                    // 但我也可能原本就被这个实体关注
+                    // But I may also have been watched by this entity.
                     if (IsFollowing(pendingEntity, aoiEntity)) continue;
                     enterFollowerCallback(pendingEntityId);
                 }
@@ -147,70 +147,70 @@ namespace Aoi
                 newZone.Enter(aoiEntity);
                 aoiEntity.ZoneKey = newZoneKey;
 
-                // 我可能会离开一些通过PendingZone关注我的实体的视距
+                // I might be out of sight of some entity that is following me via the PendingZone
                 foreach (var pendingEntityId in oldZone.PendingEntitySet)
                 {
                     var pendingEntity = _entittDict[pendingEntityId];
-                    // 新位置的我可能依旧在该实体的关注区域内
+                    // My new location may still be within the entity's area of ​​interest.
                     if (IsFollowing(pendingEntity, aoiEntity)) continue;
                     leaveFollowerCallback(pendingEntityId);
                 }
 
-                // 跨越边界，根据新的九宫格来确定离开视野范围以及新进入视野范围的实体
+                // Crossing the boundary, determine the entities that leave the field of view and enter the field of view based on the new nine-square grid
                 var oldViewZoneArray = GetViewZoneArray(oldZoneX, oldZoneY);
                 var newViewZoneArray = GetViewZoneArray(newZoneX, newZoneY);
 
-                // 我关注的实体
-                // 两个九宫格之间不重叠的新区域
+                // Entities I follow
+                // The new area between the two nine-square grids does not overlap
                 foreach (var newViewZonePoint in newViewZoneArray)
                 {
                     var distance = GetZoneDistance(newViewZonePoint.X, newViewZonePoint.Y, oldZoneX, oldZoneY);
                     if (distance <= 1) continue;
-                    // 未与旧九宫格重叠
+                    // Does not overlap with the old nine-square grid
                     ZonePointToZoneKey(newViewZonePoint.X, newViewZonePoint.Y, out var newViewZoneKey);
-                    // 如果已经存在于PendingZone，也跳过
+                    // If it already exists in the PendingZone, it is also skipped.
                     if (aoiEntity.PendingZoneKeySet.Contains(newViewZoneKey)) continue;
-                    // 该区域内的实体是刚进入视距的实体
+                    // Entities in this area are entities that have just entered line of sight
                     ScanZoneEntitysAndExclude(aoiEntity.EntityId, newViewZoneKey, enterFollowingCallback);
                 }
 
-                // 首先跨边界移动可能出现PendingZone需要清除的情况，根据距离清除
+                // First, when moving across borders, the PendingZone may need to be cleared. Clear it based on the distance.
                 foreach (var pendingZoneKey in aoiEntity.PendingZoneKeySet)
                 {
                     ZoneKeyToZonePoint(pendingZoneKey, out var pendingZoneX, out var pendingZoneY);
                     var distance = GetZoneDistance(newZoneX, newZoneY, pendingZoneX, pendingZoneY);
                     if (distance == 2) continue;
                     var pendingZone = _zoneDict[pendingZoneKey];
-                    // 移动后可能会将PendingZone划入九宫格的范围，划入九宫格的则不会离开当前视野
+                    // After moving, the PendingZone may be drawn into the range of the nine-square grid, and the one drawn into the nine-square grid will not leave the current field of view
                     if (distance > 2)
                     {
-                        // 该区域内的实体是刚离开视距的实体
+                        // The entity in this area is the entity that just left the line of sight
                         ScanZoneEntitysAndExclude(aoiEntity.EntityId, pendingZone, leaveFollowingCallback);
                     }
                     aoiEntity.PendingZoneKeySet.Remove(pendingZoneKey);
                     pendingZone.PendingEntitySet.Remove(aoiEntity.EntityId);
                 }
 
-                // 添加原先九宫格的实体到leaveFollowingList
+                // Add the original nine-square grid entity to leaveFollowingList
                 foreach (var oldViewZonePoint in oldViewZoneArray)
                 {
                     ZonePointToZoneKey(oldViewZonePoint.X, oldViewZonePoint.Y, out var curZoneKey);
                     var distance = GetZoneDistance(newZoneX, newZoneY, oldViewZonePoint.X, oldViewZonePoint.Y);
-                    // 将距离为2的Zone添加到Pending中
+                    // Add the zone with a distance of 2 to Pending
                     if (distance == 2)
                     {
                         aoiEntity.PendingZoneKeySet.Add(curZoneKey);
                         var curZone = CreateZone(curZoneKey);
                         curZone.PendingEntitySet.Add(aoiEntity.EntityId);
                     }
-                    // 距离如果大于2就直接添加到leaveFollowingList
+                    // If the distance is greater than 2, add it directly to leaveFollowingList
                     else if (distance > 2)
                     {
                         ScanZoneEntitysAndExclude(aoiEntity.EntityId, curZoneKey, leaveFollowingCallback);
                     }
                 }
 
-                // 特别关注者所在位置可能被纳入新的关注区域，但不需要处理
+                // The location of a person of special interest may be included in the new area of ​​interest, but no action is required.
                 //foreach (var following in aoiEntity.SpecialFollowingSet)
                 //{
                 //    var followingAoiEntity = _entittDict[following];
@@ -220,14 +220,14 @@ namespace Aoi
                 //    }
                 //}
 
-                // 关注我的实体
-                // 两个九宫格之间不重叠的新区域
+                // Follow my entity
+                // The new area between the two nine-square grids does not overlap
                 foreach (var newViewZonePoint in newViewZoneArray)
                 {
                     var distance = GetZoneDistance(newViewZonePoint.X, newViewZonePoint.Y, oldZoneX, oldZoneY);
                     if (distance <= 1) continue;
-                    // 找到了不重叠的新区域，当前实体可能新加入了该区域内的实体的视距中
-                    // 检查该区域的实体是不是已经通过PendingZone关注了旧位置的我
+                    // A new non-overlapping area has been found, and the current entity may have been added to the line of sight of entities in that area.
+                    // Check if the entity in this zone has already followed me in the old location through PendingZone
                     ZonePointToZoneKey(newViewZonePoint.X, newViewZonePoint.Y, out var newViewZoneKey);
                     ScanZoneEntitys(newViewZoneKey, e =>
                     {
@@ -236,13 +236,13 @@ namespace Aoi
                     });
                 }
 
-                // 我可能会离开通过原先九宫格关注我的实体的视距
+                // I may leave the sight of the entity that was originally watching me through the nine-square grid
                 foreach (var oldViewZonePoint in oldViewZoneArray)
                 {
                     var distance = GetZoneDistance(oldViewZonePoint.X, oldViewZonePoint.Y, newZoneX, newZoneY);
                     if (distance <= 1) continue;
-                    // 找到了不重叠的旧区域
-                    // 检查该区域的实体是不是通过PendingZone关注了新位置的我
+                    // Found non-overlapping old regions
+                    // Check if the entity in this zone is following me in the new location via PendingZone
                     ZonePointToZoneKey(oldViewZonePoint.X, oldViewZonePoint.Y, out var oldViewZoneKey);
                     ScanZoneEntitys(oldViewZoneKey, e =>
                     {
@@ -256,7 +256,7 @@ namespace Aoi
         }
 
         /// <summary>
-        /// 获取我关注的实体列表
+        /// Get a list of entities I'm interested in
         /// </summary>
         /// <param name="aoiEntity"></param>
         /// <returns></returns>
@@ -274,10 +274,10 @@ namespace Aoi
             {
                 ScanZoneEntitysAndExclude(aoiEntity.EntityId, pendingZoneKey, callback);
             }
-            
+
             //foreach (var following in aoiEntity.SpecialFollowingSet)
             //{
-            //    // 如果在关注区域内，说明已经添加过了，跳过
+            //    // If it is in the area of ​​interest, it has already been added, skip it
             //    var followingAoiEntity = _entittDict[following];
             //    if (!IsViewZoneEntity(aoiEntity, followingAoiEntity))
             //    {
@@ -287,13 +287,13 @@ namespace Aoi
         }
 
         /// <summary>
-        /// 获取我关注的实体列表并按半径过滤
+        /// Get a list of entities I follow and filter by radius
         /// </summary>
         /// <param name="aoiEntity"></param>
         /// <returns></returns>
         public void ScanFollowingList(AoiEntity aoiEntity, float range, Action<int> callback)
         {
-            // 如果直径小于等于格子的长度，只需要获取最近的四个格子
+            // If the diameter is less than or equal to the length of the grid, only the four nearest grids need to be obtained.
             if (range <= _zoneSize)
             {
 
@@ -302,7 +302,7 @@ namespace Aoi
 
 
         /// <summary>
-        /// 获取关注我的实体列表
+        /// Get a list of entities following me
         /// </summary>
         /// <param name="aoiEntity"></param>
         /// <returns></returns>
@@ -315,7 +315,7 @@ namespace Aoi
                 ZonePointToZoneKey(curZonePoint.X, curZonePoint.Y, out var curZoneKey);
                 ScanZoneEntitysAndExclude(aoiEntity.EntityId, curZoneKey, callback);
             }
-            // 在Pending区域中关注我的实体
+            // Follow my entity in the Pending area
             var zone = _zoneDict[aoiEntity.ZoneKey];
             foreach (var entityId in zone.PendingEntitySet)
             {
@@ -324,7 +324,7 @@ namespace Aoi
         }
 
         /// <summary>
-        /// 判断src是否关注了dest
+        /// Determine whether src is following dest
         /// </summary>
         /// <param name="aoiEntity"></param>
         /// <param name="target"></param>
@@ -355,7 +355,7 @@ namespace Aoi
         }
 
         /// <summary>
-        /// 获取九宫格可视区域
+        /// Get the visible area of ​​the nine-square grid
         /// </summary>
         private Vector2Int[] GetViewZoneArray(int x, int y)
         {

@@ -13,8 +13,8 @@ using GameServer.Manager;
 namespace GameServer.NpcSystem
 {
     /// <summary>
-    /// Npc管理器
-    /// 负责管理地图内的所有Npc
+    /// Npc manager
+    /// Responsible for managing all NPCs in the map
     /// </summary>
     public class NpcManager
     {

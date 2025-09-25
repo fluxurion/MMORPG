@@ -21,7 +21,7 @@ namespace GameServer.RewardSystem
         private RewardManager() { }
 
         /// <summary>
-        /// 发放奖励
+        /// Distribute rewards
         /// </summary>
         /// <param name="rewardId"></param>
         /// <param name="entity"></param>

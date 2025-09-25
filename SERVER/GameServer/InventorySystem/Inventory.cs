@@ -79,7 +79,7 @@ namespace GameServer.InventorySystem
                 {
                     if (!DataManager.Instance.ItemDict.TryGetValue(item.ItemId, out var define))
                     {
-                        Log.Error($"物品id不存在:{item.ItemId}");
+                        Log.Error($"Item id does not exist:{item.ItemId}");
                         continue;
                     }
 
@@ -93,7 +93,7 @@ namespace GameServer.InventorySystem
         {
             if (!DataManager.Instance.ItemDict.TryGetValue(itemId, out var define))
             {
-                Log.Error($"物品id不存在:{itemId}");
+                Log.Error($"Item id does not exist:{itemId}");
                 return 0;
             }
 
@@ -105,7 +105,7 @@ namespace GameServer.InventorySystem
                 var item = GetItem(itemId, slotId);
                 if (item == null)
                 {
-                    // 如果找不到ItemId对应的Slot了, 那就尝试在空Slot上分配
+                    // If the slot corresponding to the ItemId cannot be found, try to allocate it on an empty slot.
                     return AddItemInEmptySlot(itemId, residue);
                 }
                 Debug.Assert(item != null);
@@ -123,7 +123,7 @@ namespace GameServer.InventorySystem
         {
             if (!DataManager.Instance.ItemDict.TryGetValue(itemId, out var define))
             {
-                Log.Error($"物品id不存在:{itemId}");
+                Log.Error($"Item id does not exist:{itemId}");
                 return 0;
             }
 
@@ -143,7 +143,7 @@ namespace GameServer.InventorySystem
                 }
                 else
                 {
-                    Log.Debug($"{OwnerPlayer.User.Channel}物品槽满了, 还有{amount}个物品被丢失");
+                    Log.Debug($"{OwnerPlayer.User.Channel}Item slot full, besides{amount}items were lost");
                     return amount;
                 }
             }
@@ -170,11 +170,11 @@ namespace GameServer.InventorySystem
                 return true;
             }
 
-            //如果物品类型相同
+            //If the items are of the same type
             if (originItem.Id == targetItem.Id)
             {
                 int moveableAmount = Math.Min(targetItem.Capacity - targetItem.Amount, originItem.Amount);
-                // 如果原始物品数量小于等于可移动数量，将原始物品全部移动到目标插槽
+                // If the original item quantity is less than or equal to the movable quantity, move all the original items to the target slot.
                 if (originItem.Amount < moveableAmount)
                 {
                     targetItem.Amount += moveableAmount;
@@ -186,7 +186,7 @@ namespace GameServer.InventorySystem
                     originItem.Amount -= moveableAmount;
                 }
             }
-            //如果类型不同则交换位置
+            //If the types are different, swap positions
             else
             {
                 SetItem(targetSlotId, originItem);
@@ -196,9 +196,9 @@ namespace GameServer.InventorySystem
         }
 
         /// <summary>
-        /// 根据ItemId移除指定数量的物品
+        /// Remove the specified number of items based on ItemId
         /// </summary>
-        /// <returns>剩余待移除的数量</returns>
+        /// <returns>The remaining quantity to be removed</returns>
         public int RemoveItem(int itemId, int amount = 1)
         {
             _hasChange = true;
@@ -262,11 +262,11 @@ namespace GameServer.InventorySystem
         }
 
         /// <summary>
-        /// 丢弃指定Slot上指定数量的物品
+        /// Discard the specified number of items in the specified slot
         /// </summary>
         /// <param name="slotId"></param>
         /// <param name="amount"></param>
-        /// <returns>还有多少数量没有成功丢弃</returns>
+        /// <returns>How many have not been successfully discarded?</returns>
 
         public Item? GetItem(int itemId, int beginSlot = 0)
         {

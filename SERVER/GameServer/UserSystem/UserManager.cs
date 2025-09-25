@@ -11,8 +11,8 @@ using GameServer.Db;
 namespace GameServer.UserSystem
 {
     /// <summary>
-    /// 用户管理器
-    /// 负责管理所有已登录用户
+    /// User Manager
+    /// Responsible for managing all logged in users
     /// </summary>
     public class UserManager : Singleton<UserManager>
     {

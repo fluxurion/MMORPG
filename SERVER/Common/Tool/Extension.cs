@@ -19,38 +19,38 @@ namespace MMORPG.Common.Tool
             switch (error)
             {
                 case Proto.Base.NetError.Success:
-                    info.Description = "请求成功";
+                    info.Description = "Request successful";
                     break;
                 case Proto.Base.NetError.LoginConflict:
-                    info.Description = "当前账号已被登录";
+                    info.Description = "The current account has been logged in";
                     break;
                 case Proto.Base.NetError.IncorrectUsernameOrPassword:
-                    info.Description = "错误的用户名或密码";
+                    info.Description = "Incorrect username or password";
                     break;
                 case Proto.Base.NetError.IllegalUsername:
-                    info.Description = "非法用户名";
+                    info.Description = "Illegal username";
                     break;
                 case Proto.Base.NetError.IllegalCharacterName:
-                    info.Description = "非法角色名";
+                    info.Description = "Illegal character name";
                     break;
                 case Proto.Base.NetError.RepeatUsername:
-                    info.Description = "用户名已被注册";
+                    info.Description = "Username has been registered";
                     break;
                 case Proto.Base.NetError.RepeatCharacterName:
-                    info.Description = "角色名已被注册";
+                    info.Description = "The character name has been registered";
                     break;
                 case Proto.Base.NetError.InvalidCharacter:
-                    info.Description = "无效角色";
+                    info.Description = "Invalid role";
                     break;
                 case Proto.Base.NetError.InvalidMap:
-                    info.Description = "无效地图";
+                    info.Description = "Invalid map";
                     break;
                 case Proto.Base.NetError.CharacterCreationLimitReached:
-                    info.Description = "角色创建已达最大限制!";
+                    info.Description = "Character creation has reached the maximum limit!";
                     break;
                 case Proto.Base.NetError.UnknowError:
                 default:
-                    info.Description = "未知错误";
+                    info.Description = "unknown error";
                     break;
             }
             return info;

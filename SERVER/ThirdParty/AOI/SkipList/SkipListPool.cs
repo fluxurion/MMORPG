@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace AOI
 {
     /// <summary>
-    /// 1、对象池版，能有效避免GC。
-    /// 2、如果不是对GC有非常严苛的要求，建议不要使用这个版本。
-    /// 3、因为如果数据量过大会导致内存占用过大，严重的甚至会导致堆溢出。
+    /// 1、Object pool version, can effectively avoid GC.
+    /// 2、If you do not have very strict requirements for GC, it is recommended not to use this version.
+    /// 3、Because if the amount of data is too large, it will cause excessive memory usage, and in severe cases it may even cause heap overflow.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class SkipListPool<T>

@@ -16,11 +16,11 @@ namespace AOI.Old
         public void Awake(){}
 
         /// <summary>
-        /// 新加入AOI
+        /// Newly added to AOI
         /// </summary>
-        /// <param name="id">一般是角色的ID等其他标识ID</param>
-        /// <param name="x">X轴位置</param>
-        /// <param name="y">Y轴位置</param>
+        /// <param name="id">Usually the character's ID or other identification ID</param>
+        /// <param name="x">X-axis position</param>
+        /// <param name="y">Y-axis position</param>
         /// <returns></returns>
         public AoiNode Enter(long id, float x, float y)
         {
@@ -38,12 +38,12 @@ namespace AOI.Old
         }
 
         /// <summary>
-        /// 更新节点
+        /// Update node
         /// </summary>
-        /// <param name="id">一般是角色的ID等其他标识ID</param>
-        /// <param name="area">区域距离</param>
-        /// <param name="x">X轴位置</param>
-        /// <param name="y">Y轴位置</param>
+        /// <param name="id">Usually the character's ID or other identification ID</param>
+        /// <param name="area">area distance</param>
+        /// <param name="x">X-axis position</param>
+        /// <param name="y">Y-axis position</param>
         /// <returns></returns>
         public AoiNode Update(long id, Vector2 area, float x, float y)
         {
@@ -51,32 +51,32 @@ namespace AOI.Old
         }
 
         /// <summary>
-        /// 更新节点
+        /// Update node
         /// </summary>
-        /// <param name="node">Aoi节点</param>
-        /// <param name="area">区域距离</param>
-        /// <param name="x">X轴位置</param>
-        /// <param name="y">Y轴位置</param>
+        /// <param name="node">Aoi node</param>
+        /// <param name="area">area distance</param>
+        /// <param name="x">X-axis position</param>
+        /// <param name="y">Y-axis position</param>
         /// <returns></returns>
         public AoiNode Update(AoiNode node, Vector2 area, float x, float y)
         {
-            // 把新的AOI节点转移到旧的节点里
+            // Transfer the new AOI node to the old node
 
             node.AoiInfo.MoveOnlySet = node.AoiInfo.MovesSet.Select(d => d).ToHashSet();
 
-            // 移动到新的位置
+            // Move to new location
 
             Move(node, x, y);
 
-            // 查找周围坐标
+            // Find surrounding coordinates
 
             Find(node, area);
 
-            // 差集计算
+            // Difference calculation
 
             node.AoiInfo.EntersSet = node.AoiInfo.MovesSet.Except(node.AoiInfo.MoveOnlySet).ToHashSet();
-            
-            // 把自己添加到进入点的人
+
+            // People who added themselves to the entry point
 
             foreach (var enterNode in node.AoiInfo.EntersSet) GetNode(enterNode).AoiInfo.MovesSet.Add(node.Id);
 
@@ -94,14 +94,14 @@ namespace AOI.Old
         }
 
         /// <summary>
-        /// 移动
+        /// move
         /// </summary>
-        /// <param name="node">Aoi节点</param>
-        /// <param name="x">X轴位置</param>
-        /// <param name="y">Y轴位置</param>
+        /// <param name="node">Aoi node</param>
+        /// <param name="x">X-axis position</param>
+        /// <param name="y">Y-axis position</param>
         private void Move(AoiNode node, float x, float y)
         {
-            #region 移动X轴
+            #region Move X axis
 
             if (Math.Abs(node.Position.X - x) > 0)
             {
@@ -169,7 +169,7 @@ namespace AOI.Old
 
             #endregion
 
-            #region 移动Y轴
+            #region Move Y axis
 
             if (Math.Abs(node.Position.Y - y) > 0)
             {
@@ -242,20 +242,20 @@ namespace AOI.Old
         }
 
         /// <summary>
-        /// 根据指定范围查找周围的坐标
+        /// Find surrounding coordinates based on the specified range
         /// </summary>
-        /// <param name="id">一般是角色的ID等其他标识ID</param>
-        /// <param name="area">区域距离</param>
+        /// <param name="id">Usually the character's ID or other identification ID</param>
+        /// <param name="area">area distance</param>
         public AoiNode Find(long id, Vector2 area)
         {
             return !_nodes.TryGetValue(id, out var node) ? null : Find(node, area);
         }
 
         /// <summary>
-        /// 根据指定范围查找周围的坐标
+        /// Find surrounding coordinates based on the specified range
         /// </summary>
-        /// <param name="node">Aoi节点</param>
-        /// <param name="area">区域距离</param>
+        /// <param name="node">Aoi node</param>
+        /// <param name="area">area distance</param>
         public AoiNode Find(AoiNode node, Vector2 area)
         {
             node.AoiInfo.MovesSet.Clear();
@@ -308,9 +308,9 @@ namespace AOI.Old
         }
 
         /// <summary>
-        /// 获取节点
+        /// Get node
         /// </summary>
-        /// <param name="id">一般是角色的ID等其他标识ID</param>
+        /// <param name="id">Usually the character's ID or other identification ID</param>
         /// <returns></returns>
         public AoiNode GetNode(long id)
         {
@@ -318,10 +318,10 @@ namespace AOI.Old
         }
 
         /// <summary>
-        /// 退出AOI
+        /// Exit AOI
         /// </summary>
-        /// <param name="id">一般是角色的ID等其他标识ID</param>
-        /// <returns>需要通知的坐标列表</returns>
+        /// <param name="id">Usually the character's ID or other identification ID</param>
+        /// <returns>List of coordinates that need to be notified</returns>
         public long[] LeaveNode(long id)
         {
             if (!_nodes.TryGetValue(id, out var node)) return null;

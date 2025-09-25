@@ -1,19 +1,19 @@
 {
   "1": {
     "ID": 1,
-    "Decs": "铁匠达萨贝[1]",
-    "Content": "哦，冒险者，你来了。我这里正好有两个紧急的任务需要人手，不知道你有没有兴趣？",
+    "Decs": "Blacksmith Dasabe[1]",
+    "Content": "Oh, adventurer, you're here. I have two urgent tasks that need help. Are you interested?",
     "Options": "[2,3,4,5]",
     "Jump": 0,
     "AcceptTask": "",
     "SubmitTask": "",
     "SaveDialogueId": 0,
-    "TipResource": "疑问"
+    "TipResource": "doubt"
   },
   "2": {
     "ID": 2,
     "Decs": "",
-    "Content": "取得20个哥布林指骨",
+    "Content": "Obtain 20 Goblin Finger Bones",
     "Options": "",
     "Jump": 101,
     "AcceptTask": "",
@@ -24,7 +24,7 @@
   "3": {
     "ID": 3,
     "Decs": "",
-    "Content": "取得10根骷髅骸骨",
+    "Content": "Obtain 10 Skeleton Bones",
     "Options": "",
     "Jump": 1001,
     "AcceptTask": "",
@@ -35,7 +35,7 @@
   "4": {
     "ID": 4,
     "Decs": "",
-    "Content": "询问任务详情",
+    "Content": "Ask for task details",
     "Options": "",
     "Jump": 1201,
     "AcceptTask": "",
@@ -46,7 +46,7 @@
   "5": {
     "ID": 5,
     "Decs": "",
-    "Content": "拒绝任务",
+    "Content": "reject task",
     "Options": "",
     "Jump": 2001,
     "AcceptTask": "",
@@ -57,7 +57,7 @@
   "101": {
     "ID": 101,
     "Decs": "",
-    "Content": "好选择！这些哥布林最近在附近的森林里搞破坏，影响了村民的生活。去把它们教训一下，把它们的指骨带回来。我会给你丰厚的报酬。",
+    "Content": "Good choice! These goblins have been wreaking havoc in the nearby forest lately, disrupting the lives of the villagers. Go teach them a lesson and bring back their finger bones. I'll reward you handsomely.",
     "Options": "[102,103,104]",
     "Jump": 0,
     "AcceptTask": "",
@@ -68,7 +68,7 @@
   "102": {
     "ID": 102,
     "Decs": "",
-    "Content": "询问哥布林具体位置",
+    "Content": "Ask the Goblin for his specific location",
     "Options": "",
     "Jump": 201,
     "AcceptTask": "",
@@ -79,7 +79,7 @@
   "103": {
     "ID": 103,
     "Decs": "",
-    "Content": "询问报酬",
+    "Content": "Ask about remuneration",
     "Options": "",
     "Jump": 301,
     "AcceptTask": "",
@@ -90,7 +90,7 @@
   "104": {
     "ID": 104,
     "Decs": "",
-    "Content": "直接出发",
+    "Content": "Depart directly",
     "Options": "",
     "Jump": 401,
     "AcceptTask": "[1,3001]",
@@ -101,7 +101,7 @@
   "201": {
     "ID": 201,
     "Decs": "",
-    "Content": "就在东边的黑暗森林深处。小心，那里的哥布林非常凶残。",
+    "Content": "It's deep in the dark forest to the east. Be careful, the goblins there are very fierce.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -112,7 +112,7 @@
   "301": {
     "ID": 301,
     "Decs": "",
-    "Content": "完成任务后，我会给你50金币，还有一把我亲自打造的匕首。",
+    "Content": "After you complete the task, I will give you 50 gold coins and a dagger I forged myself.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -123,7 +123,7 @@
   "401": {
     "ID": 401,
     "Decs": "",
-    "Content": "祝你好运，冒险者！等你凯旋归来。",
+    "Content": "Good luck, adventurer! We await your triumphant return.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -134,7 +134,7 @@
   "1001": {
     "ID": 1001,
     "Decs": "",
-    "Content": "非常好！这些骷髅最近在西边的废墟中徘徊，吓坏了不少村民。去消灭它们，把骸骨带回来，我会给予你应有的回报。",
+    "Content": "Excellent! These skeletons have been wandering the western ruins lately, terrorizing the villagers. Slay them, bring back their remains, and I will reward you accordingly.",
     "Options": "[1002,1003,1004]",
     "Jump": 0,
     "AcceptTask": "",
@@ -145,7 +145,7 @@
   "1002": {
     "ID": 1002,
     "Decs": "",
-    "Content": "询问骷髅具体位置",
+    "Content": "Ask the Skeleton for its specific location",
     "Options": "",
     "Jump": 1101,
     "AcceptTask": "",
@@ -156,7 +156,7 @@
   "1003": {
     "ID": 1003,
     "Decs": "",
-    "Content": "询问报酬",
+    "Content": "Ask about remuneration",
     "Options": "",
     "Jump": 1102,
     "AcceptTask": "",
@@ -167,7 +167,7 @@
   "1004": {
     "ID": 1004,
     "Decs": "",
-    "Content": "直接出发",
+    "Content": "Depart directly",
     "Options": "",
     "Jump": 1103,
     "AcceptTask": "",
@@ -178,7 +178,7 @@
   "1101": {
     "ID": 1101,
     "Decs": "",
-    "Content": "在西边的古老废墟中。那些骷髅似乎是被某种力量召唤出来的，小心应对。",
+    "Content": "In the ancient ruins to the west, the skeletons seem to be summoned by some force, so be careful.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -189,7 +189,7 @@
   "1102": {
     "ID": 1102,
     "Decs": "",
-    "Content": "完成任务后，我会给你200金币，还有一块珍贵的魔法石。",
+    "Content": "After completing the task, I will give you 200 gold coins and a precious magic stone.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -200,7 +200,7 @@
   "1103": {
     "ID": 1103,
     "Decs": "",
-    "Content": "祝你好运，冒险者！等你凯旋归来。",
+    "Content": "Good luck, adventurer! We await your triumphant return.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -211,7 +211,7 @@
   "1201": {
     "ID": 1201,
     "Decs": "",
-    "Content": "当然，第一个任务是去取得20个哥布林獠牙，这些哥布林在东边的黑暗森林中。第二个任务是去取得10根骷髅骸骨，这些骷髅在西边的古老废墟中徘徊。两个任务都有一定的危险性，但报酬也相应丰厚。",
+    "Content": "Of course, the first quest is to obtain 20 Goblin Tusks, which are found in the Dark Forest to the east. The second quest is to obtain 10 Skeleton Bones, which are wandering in the ancient ruins to the west. Both quests are somewhat dangerous, but the rewards are also generous.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -222,7 +222,7 @@
   "2001": {
     "ID": 2001,
     "Decs": "",
-    "Content": "没关系，冒险者。希望下次还能找到你帮忙。保重。",
+    "Content": "It's alright, adventurer. I hope I can find your help again next time. Take care.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -233,7 +233,7 @@
   "3001": {
     "ID": 3001,
     "Decs": "",
-    "Content": "你身上貌似已经有了接取的委托了。",
+    "Content": "It seems like you already have a commission to accept.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -244,7 +244,7 @@
   "3002": {
     "ID": 3002,
     "Decs": "",
-    "Content": "你身上的东西似乎不够。",
+    "Content": "There doesn't seem to be enough of what you have.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -255,18 +255,18 @@
   "4001": {
     "ID": 4001,
     "Decs": "",
-    "Content": "怎么样，东西已经带回来了吗？",
+    "Content": "How is it, have you brought the things back?",
     "Options": "[5001,5002]",
     "Jump": 0,
     "AcceptTask": "",
     "SubmitTask": "",
     "SaveDialogueId": 0,
-    "TipResource": "感叹"
+    "TipResource": "sigh"
   },
   "5001": {
     "ID": 5001,
     "Decs": "",
-    "Content": "是的，我来提交。",
+    "Content": "Yes, I'll submit it.",
     "Options": "",
     "Jump": 5003,
     "AcceptTask": "",
@@ -277,7 +277,7 @@
   "5002": {
     "ID": 5002,
     "Decs": "",
-    "Content": "还没有。",
+    "Content": "not yet.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",
@@ -288,7 +288,7 @@
   "5003": {
     "ID": 5003,
     "Decs": "",
-    "Content": "哦，真的非常感谢你冒险者，这是你应得的。",
+    "Content": "Oh, thank you so much, adventurer, you deserve it.",
     "Options": "",
     "Jump": 0,
     "AcceptTask": "",

@@ -7,18 +7,18 @@ namespace MMORPG.Common.Inventory
     //物品类型
     public enum ItemType
     {
-        Material,       //材料&道具
-        Consumable,     //消耗品
-        Equipment,      //武器&装备
+        Material,       //材料&tool
+        Consumable,     //Consumables
+        Equipment,      //武器&equipment
     }
     //物品品质
     public enum Quality
     {
-        Common,     // 普通
+        Common,     // usually
         Uncommon,   // 非凡
-        Rare,       // 稀有
-        Epic,       // 史诗
-        Legendary,  // 传说
+        Rare,       // rare
+        Epic,       // epic
+        Legendary,  // legend
         Artifact,   // 神器
     }
 
@@ -59,18 +59,18 @@ namespace MMORPG.Common.Inventory
 
             ItemType = Define.ItemType switch
             {
-                "消耗品" => ItemType.Consumable,
-                "道具" => ItemType.Material,
-                "装备" => ItemType.Equipment,
+                "Consumables" => ItemType.Consumable,
+                "tool" => ItemType.Material,
+                "equipment" => ItemType.Equipment,
                 _ => throw new IndexOutOfRangeException()
             };
             Quality = Define.Quality switch
             {
-                "普通" => Quality.Common,
+                "usually" => Quality.Common,
                 "非凡" => Quality.Uncommon,
-                "稀有" => Quality.Rare,
-                "史诗" => Quality.Epic,
-                "传说" => Quality.Legendary,
+                "rare" => Quality.Rare,
+                "epic" => Quality.Epic,
+                "legend" => Quality.Legendary,
                 "神器" => Quality.Artifact,
                 _ => throw new IndexOutOfRangeException()
             };

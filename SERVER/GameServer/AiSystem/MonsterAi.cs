@@ -36,11 +36,11 @@ namespace GameServer.AiSystem
         public Actor? ChasingTarget;
         public Random Random = new();
 
-        // 相对于出生点的活动范围
+        // Range of activity relative to the spawn point
         public float WalkRange;
-        // 相对于出生点的追击范围
+        // Pursuit range relative to spawn point
         public float ChaseRange;
-        // 攻击范围
+        // Attack range
         public float AttackRange;
 
         public MonsterAbilityManager(Monster ownerMonster)
@@ -131,7 +131,7 @@ namespace GameServer.AiSystem
             switch (attackInfo.AttackerType)
             {
                 case AttackerType.Skill:
-                    // 能拿到攻击者，施加一个力
+                    // Can get the attacker, apply a force
                     var skillDefine = DataManager.Instance.SkillDict[attackInfo.SkillId];
                     var target = EntityManager.Instance.GetEntity(attackInfo.AttackerId);
                     if (target == null) return;
@@ -150,7 +150,7 @@ namespace GameServer.AiSystem
             OwnerMonster.ZeroFlagState();
             ChangeAnimationState(AnimationState.Death);
 
-            // 掉落物品
+            // dropped items
             var killRewardList = DataHelper.ParseIntegers(OwnerMonster.SpawnDefine.killRewardList);
             foreach (var rewardId in killRewardList)
             {
@@ -169,7 +169,7 @@ namespace GameServer.AiSystem
                 }
             }
 
-            // 掉落经验
+            // Drop experience
             {
                 if (OwnerMonster.DamageSourceInfo == null) return;
                 var entity =
@@ -229,7 +229,7 @@ namespace GameServer.AiSystem
         }
 
         /// <summary>
-        /// 巡逻状态
+        /// patrol status
         /// </summary>
         public class WalkState : FSMAbstractState<MonsterAiState, MonsterAbilityManager>
         {
@@ -267,7 +267,7 @@ namespace GameServer.AiSystem
                     return;
                 }
 
-                // 查找怪物视野范围内距离怪物最近的玩家
+                // Find the player closest to the monster within the monster's field of view
                 var nearestPlayer = monster.Map.GetEntityFollowingNearest(monster, 
                     e =>
                     {
@@ -278,12 +278,12 @@ namespace GameServer.AiSystem
 
                 if (nearestPlayer != null)
                 {
-                    // 若玩家位于怪物的追击范围内
-                    float d1 = Vector2.Distance(monster.InitPos, nearestPlayer.Position); // 目标与出生点的距离
-                    float d2 = Vector2.Distance(monster.Position, nearestPlayer.Position); // 自身与目标的距离
+                    // If the player is within the monster's pursuit range
+                    float d1 = Vector2.Distance(monster.InitPos, nearestPlayer.Position); // Distance from target to spawn point
+                    float d2 = Vector2.Distance(monster.Position, nearestPlayer.Position); // The distance between yourself and the target
                     if (d1 <= _target.ChaseRange && d2 <= _target.ChaseRange)
                     {
-                        // 切换为追击状态
+                        // Switch to pursuit mode
                         _target.ChasingTarget = nearestPlayer as Actor;
                         _fsm.ChangeState(MonsterAiState.Chase);
                         return;
@@ -295,7 +295,7 @@ namespace GameServer.AiSystem
 
                 _lastRandomPointWithBirth = RandomPointWithBirth(_target.WalkRange);
 
-                // 状态是空闲或等待时间已结束，则尝试随机移动
+                // If the state is idle or the waiting time has expired, try to move randomly
                 _waitTime = _target.Random.NextSingle() * 10;
                 _lastTime = Time.time;
                 _target.Move(_lastRandomPointWithBirth);
@@ -313,7 +313,7 @@ namespace GameServer.AiSystem
         }
 
         /// <summary>
-        /// 技能释放状态
+        /// Skill release status
         /// </summary>
         public class CastState : FSMAbstractState<MonsterAiState, MonsterAbilityManager>
         {
@@ -340,7 +340,7 @@ namespace GameServer.AiSystem
         }
 
         /// <summary>
-        /// 受击状态
+        /// Hit status
         /// </summary>
         public class HurtState : FSMAbstractState<MonsterAiState, MonsterAbilityManager>
         {
@@ -389,7 +389,7 @@ namespace GameServer.AiSystem
         }
 
         /// <summary>
-        /// 追击状态
+        /// pursuit status
         /// </summary>
         public class ChaseState : FSMAbstractState<MonsterAiState, MonsterAbilityManager>
         {
@@ -423,8 +423,8 @@ namespace GameServer.AiSystem
                     return;
                 }
 
-                float d1 = Vector2.Distance(monster.Position, player.Position);  // 自身与目标的距离
-                float d2 = Vector2.Distance(monster.Position, monster.InitPos); // 自身与出生点的距离
+                float d1 = Vector2.Distance(monster.Position, player.Position);  // The distance between yourself and the target
+                float d2 = Vector2.Distance(monster.Position, monster.InitPos); // The distance between the user and the birth point
                 if (d1 > _target.ChaseRange || d2 > _target.ChaseRange)
                 {
                     _fsm.ChangeState(MonsterAiState.Goback);
@@ -433,7 +433,7 @@ namespace GameServer.AiSystem
 
                 if (d1 <= _target.AttackRange)
                 {
-                    // 距离足够，可以尝试释放技能了
+                    // The distance is enough, you can try to release the skill
                     _fsm.ChangeState(MonsterAiState.Cast);
                     return;
                 }
@@ -445,7 +445,7 @@ namespace GameServer.AiSystem
         }
 
         /// <summary>
-        /// 返回状态
+        /// return status
         /// </summary>
         public class GobackState : FSMAbstractState<MonsterAiState, MonsterAbilityManager>
         {
@@ -457,13 +457,13 @@ namespace GameServer.AiSystem
             {
                 _target.Move(_target.OwnerMonster.InitPos);
 
-                // 切回巡逻状态，使得回出生点的过程也能继续寻敌
+                // Switch back to patrol mode, so that you can continue to search for enemies while returning to the birth point
                 _fsm.ChangeState(MonsterAiState.Walk);
             }
         }
 
         /// <summary>
-        /// 死亡状态
+        /// state of death
         /// </summary>
         public class DeathState : FSMAbstractState<MonsterAiState, MonsterAbilityManager>
         {

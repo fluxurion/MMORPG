@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace GameServer.Manager
 {
     /// <summary>
-    /// 负责所有组件的更新
+    /// Responsible for updating all components
     /// </summary>
     public class UpdateManager : Singleton<UpdateManager>
     {
@@ -29,16 +29,16 @@ namespace GameServer.Manager
         public void Start()
         {
             DataManager.Instance.Start();
-            Log.Information("[Server] DataManager初始化完成");
+            Log.Information("[Server] DataManager Initialization completed");
 
             EntityManager.Instance.Start();
-            Log.Information("[Server] EntityManager初始化完成");
+            Log.Information("[Server] EntityManager Initialization completed");
 
             MapManager.Instance.Start();
-            Log.Information("[Server] MapManager初始化完成");
+            Log.Information("[Server] MapManager Initialization completed");
 
             UserManager.Instance.Start();
-            Log.Information("[Server] UserManager初始化完成");
+            Log.Information("[Server] UserManager Initialization completed");
 
             Scheduler.Instance.Register(1000 / Fps, Update);
         }
@@ -60,7 +60,7 @@ namespace GameServer.Manager
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, "[UpdateManager] task()时出现报错");
+                    Log.Error(e, "[UpdateManager] task() An error occurs when");
                 }
             }
             _backupTaskQueue.Clear();
@@ -71,7 +71,7 @@ namespace GameServer.Manager
             }
             catch (Exception e)
             {
-                Log.Error(e, "[UpdateManager] DataManager.Instance.Update()时出现报错");
+                Log.Error(e, "[UpdateManager] DataManager.Instance.Update() An error occurs when");
             }
 
             try
@@ -80,7 +80,7 @@ namespace GameServer.Manager
             }
             catch (Exception e)
             {
-                Log.Error(e, "[UpdateManager] EntityManager.Instance.Update()时出现报错");
+                Log.Error(e, "[UpdateManager] EntityManager.Instance.Update() An error occurs when");
             }
 
             try
@@ -89,7 +89,7 @@ namespace GameServer.Manager
             }
             catch (Exception e)
             {
-                Log.Error(e, "[UpdateManager] MapManager.Instance.Update()时出现报错");
+                Log.Error(e, "[UpdateManager] MapManager.Instance.Update() An error occurs when");
             }
 
             try
@@ -98,12 +98,12 @@ namespace GameServer.Manager
             }
             catch (Exception e)
             {
-                Log.Error(e, "[UpdateManager] UserManager.Instance.Update()时出现报错");
+                Log.Error(e, "[UpdateManager] UserManager.Instance.Update() An error occurs when");
             }
         }
 
         /// <summary>
-        /// 线程安全
+        /// Thread safety
         /// </summary>
         /// <param name="task"></param>
         public void AddTask(Action task)

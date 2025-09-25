@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MMORPG.Common.Inventory
 {
     /// <summary>
-    /// 装备
+    /// equipment
     /// </summary>
     public class Equipment : Item
     {

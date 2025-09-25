@@ -10,7 +10,7 @@ namespace AOI
             var zone = new AoiZone(.001f, .001f);
             var area = new Vector2(1, 1);
 
-            // 添加500个玩家。
+            // Add 500 players.
 
             for (var i = 1; i <= 6; i++)
             {
@@ -20,19 +20,19 @@ namespace AOI
                 }
             }
 
-            // 测试移动。
+            // Test move.
             // while (true)
             // {
             //     Console.WriteLine("1");
             //     zone.Refresh(new Random().Next(0, 50000), new Random().Next(0, 50000), new Random().Next(0, 50000), area);
             //     Console.WriteLine("2");
             // }
-    
-            // 刷新key为3的信息。
-    
+
+            // Refresh the information with key 3.
+
             zone.Refresh(3, area, out var enters);
 
-            Console.WriteLine("---------------加入玩家范围的玩家列表--------------");
+            Console.WriteLine("---------------List of players that have joined the player scope--------------");
     
             foreach (var aoiKey in enters)
             {
@@ -45,7 +45,7 @@ namespace AOI
             var entity = zone.Refresh(3, 1, 3, area, out enters);
 
 
-            Console.WriteLine("---------------离开玩家范围的玩家列表--------------");
+            Console.WriteLine("---------------List of players who have left player range--------------");
     
             foreach (var aoiKey in entity.Leave)
             {
@@ -53,7 +53,7 @@ namespace AOI
                 Console.WriteLine($"X:{findEntity.X.Value} Y:{findEntity.Y.Value}");
             }
 
-            Console.WriteLine("---------------进入玩家范围的玩家列表--------------");
+            Console.WriteLine("---------------List of players entering the player range--------------");
 
             foreach (var aoiKey in entity.Enter)
             {
@@ -64,7 +64,7 @@ namespace AOI
 
 
 
-            Console.WriteLine("---------------key为3移动后玩家范围内的新玩家列表--------------");
+            Console.WriteLine("---------------key is the new player list within the player range after 3 moves--------------");
     
             foreach (var aoiKey in entity.ViewEntity)
             {

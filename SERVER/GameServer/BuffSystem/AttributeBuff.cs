@@ -54,11 +54,11 @@ namespace GameServer.BuffSystem
 
                         float percentage = int.Parse(content.Substring(0, content.Length - 1));
 
-                        // 获取属性值
+                        // Get attribute value
                         var tmp = propertyInfo.GetValue(BuffManager.OwnerActor);
                         if (tmp == null || !(tmp is int)) continue;
                         int propertyValue = (int)tmp;
-                        // 计算并返回结果
+                        // Calculate and return the result
                         value = (int)(propertyValue * percentage / 100);
                     }
                     else

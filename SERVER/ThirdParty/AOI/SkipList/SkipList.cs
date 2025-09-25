@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace AOI
 {
     /// <summary>
-    /// 跳跃表
+    /// jump table
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class SkipList<T>

@@ -20,7 +20,7 @@ namespace GameServer.FightSystem
 
         public void Start()
         {
-            // 应该从数据库中读取，当前未设计，直接加载所有技能
+            // Should be read from the database, currently not designed to load all skills directly
             var list = DataManager.Instance.SkillDict.Values
                 .Where(s => s.UnitID == OwnerActor.UnitDefine.ID)
                 .ToList();

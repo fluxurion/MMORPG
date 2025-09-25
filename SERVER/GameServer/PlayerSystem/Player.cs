@@ -130,11 +130,11 @@ namespace GameServer.PlayerSystem
 
         public static int CalculateExp(int level)
         {
-            // 基础经验值
+            // Basic experience value
             const int baseXP = 100;
-            // 级数调整因子
+            // Series adjustment factor
             const double levelFactor = 1.5;
-            // 经验值公式
+            // Experience value formula
             return (int)(baseXP * Math.Pow(level, levelFactor));
         }
     }

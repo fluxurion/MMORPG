@@ -4,57 +4,57 @@
     {
         public float Speed { get; set; }
         /// <summary>
-        /// 生命上限
+        /// life limit
         /// </summary>
         public float MaxHp { get; set; }
         /// <summary>
-        /// 魔法上限
+        /// magic upper limit
         /// </summary>
         public float MaxMp { get; set; }
         /// <summary>
-        /// 物攻
+        /// physical attack
         /// </summary>
         public float Ad { get; set; }
         /// <summary>
-        /// 魔攻
+        /// Magic attack
         /// </summary>
         public float Ap { get; set; }
         /// <summary>
-        /// 物防
+        /// physical defense
         /// </summary>
         public float Def { get; set; }
         /// <summary>
-        /// 魔防
+        /// Magic defense
         /// </summary>
         public float Mdef { get; set; }
         /// <summary>
-        /// 暴击率
+        /// Critical hit rate
         /// </summary>
         public float Cri { get; set; }
         /// <summary>
-        /// 暴击伤害
+        /// Critical damage
         /// </summary>
         public float Con { get; set; }
         public float Crd { get; set; }
         /// <summary>
-        /// 力量
+        /// strength
         /// </summary>
         public float Str { get; set; }
         /// <summary>
-        /// 智力
+        /// intelligence
         /// </summary>
         public float Int { get; set; }
         /// <summary>
-        /// 敏捷
+        /// agile
         /// </summary>
         public float Agi { get; set; }
 
         /// <summary>
-        /// 命中率
+        /// hit rate
         /// </summary>
         public float HitRate { get; set; }
         /// <summary>
-        /// 闪避率
+        /// Dodge rate
         /// </summary>
         public float DodgeRate { get; set; }
 

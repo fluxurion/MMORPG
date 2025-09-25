@@ -16,11 +16,11 @@ namespace GameServer.Tool
             var ctorInfos = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
 
             var ctor = Array.Find(ctorInfos, c => c.GetParameters().Length == 0)
-                ?? throw new Exception($"单例({type})必须要有一个非public的无参构造函数!");
+                ?? throw new Exception($"Singleton({type})There must be a non-public no-argument constructor!");
 #if DEBUG
             var publicCtorInfos = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             if (publicCtorInfos.Length != 0)
-                throw new Exception($"单例({type})不能有public构造函数!");
+                throw new Exception($"Singleton({type})Cannot have a public constructor!");
 #endif
             var inst = ctor.Invoke(null) as T;
             Debug.Assert(inst != null);
@@ -29,8 +29,8 @@ namespace GameServer.Tool
     }
 
     /// <summary>
-    /// 单例模式
-    /// 注意: 一定要有一个私有的构造函数!
+    /// Singleton pattern
+    /// Note: There must be a private constructor!
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class Singleton<T> where T : Singleton<T>

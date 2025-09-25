@@ -44,7 +44,7 @@ namespace GameServer.NpcSystem
             {
                 if (!DataManager.Instance.NpcDict.TryGetValue(record.NpcId, out var define))
                 {
-                    Log.Error($"NpcId不存在:{record.NpcId}");
+                    Log.Error($"NpcId does not exist:{record.NpcId}");
                     continue;
                 }
                 _recordDict[record.NpcId] = record;
@@ -59,7 +59,7 @@ namespace GameServer.NpcSystem
             }
             if (!DataManager.Instance.NpcDict.TryGetValue(npcId, out var define))
             {
-                Log.Error($"NpcId不存在:{npcId}");
+                Log.Error($"NpcId does not exist:{npcId}");
                 return 0;
             }
             return define.StartDialogueId;

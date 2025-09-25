@@ -96,7 +96,7 @@ namespace GameServer.NetService
                 {
                     if (sender.User == null || sender.User.Player == null) return;
                     player = sender.User.Player;
-                    // 查找距离最近的物体
+                    // Find the closest object
 
                     var entity =
                         player.Map.GetEntityFollowingNearest(player, entity => entity.EntityType == EntityType.DroppedItem);

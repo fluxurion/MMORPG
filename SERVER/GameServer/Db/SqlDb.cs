@@ -19,15 +19,15 @@ namespace GameServer.Db
                 .UseAutoSyncStructure(true)
             .Build();
 
-            // 检查数据库是否存在
+            // Check if the database exists
             var exists = FreeSql.Ado.QuerySingle<int>($"SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name = '{DbConfig.DbName}'") > 0;
             if (!exists)
             {
                 FreeSql.Ado.ExecuteNonQuery($"CREATE DATABASE {DbConfig.DbName}");
-                Log.Information($"数据库“{DbConfig.DbName}”不存在，已自动创建");
+                Log.Information($"The database \"{DbConfig.DbName}\" does not exist and has been automatically created");
             }
 
-            // 重新链接
+            // Relink
             FreeSql = new FreeSql.FreeSqlBuilder()
                 .UseConnectionString(global::FreeSql.DataType.MySql,  $"Data Source={DbConfig.Host};Port={DbConfig.Port};User Id={DbConfig.User};Password={DbConfig.Password};" +
                                                                       $"Initial Catalog={DbConfig.DbName};Charset=utf8;SslMode=none;Max pool size=10")
@@ -40,7 +40,7 @@ namespace GameServer.Db
             {
                 // FreeSql.CodeFirst.SyncStructure<DbUser>();
                 FreeSql.Insert(new DbUser("root", "1234567890", Authoritys.Administrator)).ExecuteAffrows();
-                Log.Information($"数据库“{DbConfig.DbName}”中的“user”表不存在，已自动创建，并添加一个管理员账号（账号=root，密码=1234567890）");
+                Log.Information($"The \"user\" table in the database \"{DbConfig.DbName}\" does not exist. It has been automatically created and an administrator account has been added (account=root, password=1234567890)");
             }
         }
     }

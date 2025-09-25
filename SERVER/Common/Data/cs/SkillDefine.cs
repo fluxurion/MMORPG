@@ -1,41 +1,41 @@
 //
 // Auto Generated Code By excel2json
 // https://neil3d.gitee.io/coding/excel2json.html
-// 1. 每个 Sheet 形成一个 Struct 定义, Sheet 的名称作为 Struct 的名称
-// 2. 表格约定：第一行是变量名称，第二行是变量类型
+// 1. Each Sheet forms a Struct definition, and the name of the Sheet is used as the name of the Struct
+// 2. Table convention: the first row is the variable name, the second row is the variable type
 
 // Generate From SkillDefine.xlsx
 
 public class SkillDefine
 {
-	public int ID; // 编号
-	public int UnitID; // 单位类型
-	public int Code; // 技能码
-	public string Name; // 技能名称
-	public string Description; // 技能描述
-	public int Level; // 技能等级
-	public int MaxLevel; // 技能上限
-	public string Mode; // 模式
-	public string Icon; // 技能图标
-	public string TargetType; // 目标类型
-	public float Cd; // 冷却时间
-	public float SpellRange; // 施法距离
-	public int Cost; // 魔法消耗
-	public float IntonateTime; // 施法前摇
-	public string Anim1; // 前摇动作
-	public string Anim2; // 激活动作
-	public int ReqLevel; // 等级要求
-	public int MissileUnitId; // 投射物UnitId
-	public float Duration; // 持续时间
-	public float Area; // 影响区域
-	public string AreaOffset; // 区域偏移
-	public string HitDelay; // 命中延迟
-	public string Buff; // 附加效果
-	public float Ad; // 物理攻击
-	public float Ap; // 法术攻击
-	public float Adc; // 物攻加成
-	public float Apc; // 法攻加成
-	public float Force; // 对实体施加的力
+	public int ID; // serial number
+    public int UnitID; // Unit type
+    public int Code; // Skill code
+    public string Name; // Skill name
+    public string Description; // Skill description
+    public int Level; // Skill level
+    public int MaxLevel; // Skill ceiling
+    public string Mode; // model
+    public string Icon; // Skill icon
+    public string TargetType; // target type
+    public float Cd; // Cooling time
+    public float SpellRange; // Casting distance
+    public int Cost; // mana cost
+    public float IntonateTime; // Casting time
+    public string Anim1; // Forward rocking action
+    public string Anim2; // Activate action
+    public int ReqLevel; // Level requirements
+    public int MissileUnitId; // ProjectileUnitId
+    public float Duration; // duration
+    public float Area; // Influence area
+    public string AreaOffset; // area offset
+    public string HitDelay; // hit delay
+    public string Buff; // additional effects
+    public float Ad; // physical attack
+    public float Ap; // spell attack
+    public float Adc; // Physical Attack Bonus
+    public float Apc; // Magic attack bonus
+    public float Force; // Force applied to the entity
 }
 
 

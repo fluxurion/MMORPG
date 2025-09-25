@@ -25,7 +25,7 @@ namespace GameServer.NetService
                 var player = sender.User.Player;
                 if (req.Info.CasterId != player.EntityId)
                 {
-                    Log.Debug($"{sender}施法者不匹配");
+                    Log.Debug($"{sender}Caster mismatch");
                     sender.Send(new SpellFailResponse()
                     {
                         CasterId = req.Info.CasterId,

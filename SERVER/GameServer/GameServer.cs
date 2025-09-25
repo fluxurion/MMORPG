@@ -27,18 +27,18 @@ namespace GameServer
 
         public async Task Run()
         {
-            Log.Information("[Server] 开启服务器");
+            Log.Information("[Server] Start the server");
 
-            Log.Information("[Server] 开始初始化Manager...");
+            Log.Information("[Server] Start initializing Manager...");
             UpdateManager.Instance.Start();
-            Log.Information("[Server] Manager初始化完成");
+            Log.Information("[Server] Manager initialization completed");
 
             _serverSocket.Listen();
             //_connectionCleanupTimer.Start();
             while (true)
             {
                 var socket = await _serverSocket.AcceptAsync();
-                Log.Information($"[Server] 客户端连接:{socket.RemoteEndPoint}");
+                Log.Information($"[Server] client connection:{socket.RemoteEndPoint}");
                 NetChannel channel = new(socket);
                 OnNewChannelConnection(channel);
                 Task.Run(channel.StartAsync);
@@ -63,7 +63,7 @@ namespace GameServer
                 var duration = now - sender.LastActiveTime;
                 if (duration > ChannelConfig.CleanupMs)
                 {
-                    // sender已关闭也不会产生错误
+                    // The sender is closed and no error is generated
                     sender.Close();
                 }
                 else
@@ -99,7 +99,7 @@ namespace GameServer
                     }
                     catch (Exception exception)
                     {
-                        //TODO _channels.Remove的报错处理
+                        //TODO _channels.Remove error handling
                     }
                 }
             }

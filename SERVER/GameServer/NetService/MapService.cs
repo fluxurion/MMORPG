@@ -30,7 +30,7 @@ namespace Service
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                //Log.Debug($"{request.EntityId}请求同步: Pos:{request.Transform.Position} | Id:{request.StateId}");
+                //Log.Debug($"{request.EntityId}Request synchronization: Pos:{request.Transform.Position} | Id:{request.StateId}");
                 sender.User?.Player?.Map.EntityTransformSync(request.EntityId, request.Transform, request.StateId,
                     request.Data);
             });
@@ -41,7 +41,7 @@ namespace Service
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}发送聊天请求: Message:{request.Message}, Type:{request.MessageType}");
+                Log.Debug($"{sender}Send chat request: Message:{request.Message}, Type:{request.MessageType}");
                 var time = Timestamp.FromDateTime(DateTime.UtcNow);
 
                 sender.Send(new SubmitChatMessageResponse()
@@ -52,15 +52,15 @@ namespace Service
 
                 Debug.Assert(sender.User?.Player != null);
 
-                // 如果是作弊指令的开头并且是管理员账号
+                // If it is the beginning of a cheat command and it is an administrator account
                 if (request.Message.StartsWith("--/") && sender.User.DbUser.Authority == Authoritys.Administrator)
                 {
                     var cmd = request.Message[3..];
-                    var str = $"管理员:\"{sender}\"使用作弊指令:{cmd}";
-                    if (cmd == "等级提升")
+                    var str = $"administrator:\"{sender}\"Use cheats:{cmd}";
+                    if (cmd == "Level up")
                     {
                         sender.User?.Player?.AddLevel(1);
-                        str += $", 等级提升了1, 当前等级:{sender.User?.Player?.Level}";
+                        str += $", Level increased by 1, current level:{sender.User?.Player?.Level}";
                     }
                     Log.Information(str);
                 }

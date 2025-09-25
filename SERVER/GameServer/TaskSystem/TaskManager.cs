@@ -47,7 +47,7 @@ namespace GameServer.TaskSystem
             {
                 if (!DataManager.Instance.TaskDict.TryGetValue(record.TaskId, out var define))
                 {
-                    Log.Error($"TaskId不存在:{record.TaskId}");
+                    Log.Error($"TaskId does not exist:{record.TaskId}");
                     continue;
                 }
                 TaskList.Add(record.TaskId);
@@ -58,7 +58,7 @@ namespace GameServer.TaskSystem
         {
             if (TaskList.Contains(taskId))
             {
-                Log.Warning("重复接取任务");
+                Log.Warning("Repeated tasks");
                 return false;
             }
             TaskList.Add(taskId);

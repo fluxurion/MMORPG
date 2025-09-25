@@ -1,18 +1,18 @@
 //
 // Auto Generated Code By excel2json
 // https://neil3d.gitee.io/coding/excel2json.html
-// 1. 每个 Sheet 形成一个 Struct 定义, Sheet 的名称作为 Struct 的名称
-// 2. 表格约定：第一行是变量名称，第二行是变量类型
+// 1. Each Sheet forms a Struct definition, and the name of the Sheet is used as the name of the Struct
+// 2. Table convention: the first row is the variable name, the second row is the variable type
 
 // Generate From TaskDefine.xlsx
 
 public class TaskDefine
 {
-	public int ID; // 任务ID
-	public string Name; // 名称
-	public string Decs; // 介绍
-	public string Requirement; // 提交要求
-	public int CompletionReward; // 完成奖励，RewardId
+	public int ID; // Task ID
+    public string Name; // name
+    public string Decs; // introduce
+    public string Requirement; // Submit a request
+    public int CompletionReward; // Completion reward, RewardId
 }
 
 

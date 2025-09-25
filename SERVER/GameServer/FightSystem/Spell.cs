@@ -17,7 +17,7 @@ using GameServer.MonsterSystem;
 namespace GameServer.FightSystem
 {
     /// <summary>
-    /// 技能释放器
+    /// Skill Releaser
     /// </summary>
     public class Spell
     {
@@ -50,11 +50,11 @@ namespace GameServer.FightSystem
 
             if (OwnerActor is Player player)
             {
-                Log.Information($"{player}请求释放技能: TargetType:{skill.Define.TargetType}, {info}");
+                Log.Information($"{player}Request to release skills: TargetType:{skill.Define.TargetType}, {info}");
             }
             else if (OwnerActor is Monster monster)
             {
-                Log.Information($"{monster}请求释放技能: TargetType:{skill.Define.TargetType}, {info}");
+                Log.Information($"{monster}Request to release skills: TargetType:{skill.Define.TargetType}, {info}");
             }
             switch (skill.Define.TargetType)
             {
@@ -65,19 +65,19 @@ namespace GameServer.FightSystem
                 case "Position":
                     return CastPosition(skill, info);
                 default:
-                    Log.Error("[Spell.Cast]无效的目标类型.");
+                    Log.Error("[Spell.Cast]Invalid target type.");
                     return CastResult.TargetInvaild;
             }
         }
 
-        // 释放无目标技能
+        // Release non-targeted skills
         private CastResult CastNone(Skill skill, CastInfo info)
         {
             var target = new CastTargetEntity(OwnerActor);
             return CastTarget(skill, info, target);
         }
 
-        // 释放单位目标技能
+        // Release unit-targeting skills
         private CastResult CastUnit(Skill skill, CastInfo info)
         {
             var targetActor = EntityManager.Instance.GetEntity(info.CastTarget.TargetId) as Actor;
@@ -90,7 +90,7 @@ namespace GameServer.FightSystem
             return CastTarget(skill, info, target);
         }
 
-        // 释放位置目标技能
+        // Release location-targeted skills
         private CastResult CastPosition(Skill skill, CastInfo info)
         {
             var target = new CastTargetPosition(info.CastTarget.TargetPos.ToVector3().ToVector2());
@@ -118,7 +118,7 @@ namespace GameServer.FightSystem
             {
                 if (result != CastResult.Success)
                 {
-                    Log.Debug($"{player.User.Channel}请求攻击时出现错误: {result}");
+                    Log.Debug($"{player.User.Channel}An error occurred while requesting the attack: {result}");
                 }
                 player.User.Channel.Send(new SpellFailResponse()
                 {

@@ -79,8 +79,8 @@ namespace MMORPG.Common.Network
         {
             if (!_socket.Connected)
             {
-                // 如果为false, 说明是由报错引起的断开连接
-                // 所以直接通知ConnectionClosed
+                // If it is false, it means the disconnection is caused by an error.
+                // So directly notify ConnectionClosed
                 if (_closeConnectionByManual == false)
                 {
                     ConnectionClosed?.Invoke(this, new ConnectionClosedEventArgs(true));
@@ -105,7 +105,7 @@ namespace MMORPG.Common.Network
             }
             finally
             {
-                _closeConnectionByManual ??= true;      // 如果这个值被设置过, 说明可能是Error引起的关闭
+                _closeConnectionByManual ??= true;      // If this value has been set, it may be closed due to Error
                 _socket.Close();
                 ConnectionClosed?.Invoke(this, new ConnectionClosedEventArgs(true));
             }
@@ -114,7 +114,7 @@ namespace MMORPG.Common.Network
         public async Task SendAsync(Google.Protobuf.IMessage msg)
         {
             if (!_socket.Connected) {
-                WarningOccur?.Invoke(this, new WarningOccurEventArgs("尝试向一个已经关闭的Socket发送数据!"));
+                WarningOccur?.Invoke(this, new WarningOccurEventArgs("Trying to send data to a closed socket!"));
                 return;
             }
             try
@@ -134,7 +134,7 @@ namespace MMORPG.Common.Network
         {
             if (!_socket.Connected)
             {
-                WarningOccur?.Invoke(this, new WarningOccurEventArgs("尝试向一个已经关闭的Socket发送数据!"));
+                WarningOccur?.Invoke(this, new WarningOccurEventArgs("Trying to send data to a closed socket!"));
                 return;
             }
             try
@@ -189,7 +189,7 @@ namespace MMORPG.Common.Network
             {
                 if (_closeConnectionByManual != null)
                 {
-                    WarningOccur?.Invoke(this, new WarningOccurEventArgs("在Socket被关闭后发生了ObjectDisposedException"));
+                    WarningOccur?.Invoke(this, new WarningOccurEventArgs("An ObjectDisposedException occurred after the Socket was closed"));
                     return;
                 }
             }

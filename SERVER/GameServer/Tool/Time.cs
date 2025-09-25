@@ -12,7 +12,7 @@ namespace GameServer.Tool
         private static long _startTime = 0;
         private static long _lastTime = 0;
 
-        //TODO time命名
+        //TODO time naming
         public static float time { get; private set; }
         public static float DeltaTime { get; private set; }
 

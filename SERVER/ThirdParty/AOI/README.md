@@ -1,29 +1,29 @@
-# 1、AOI库介绍
+# 1、AOI Library Introduction
 
-> 1. 使用跳跃表+十字链方式实现的一个AOI库。
-> 2. 可做简单的碰撞检测、客户端资源、服务器AOI。
-> 3. 测试效率插入、移动、查找均到毫秒一下。
+> 1. An AOI library implemented using a jump table + cross chain method.
+> 2. Can do simple collision detection, client resources, and server AOI.
+> 3. The test efficiency of insertion, movement and search is less than milliseconds.
 
-### 1.1 一个简单的Demo
+### 1.1 A simple demo
 
 ```c#
-// 创建一个AOI区域、如果地图过大可以定义多个区域
+// Create an AOI area. If the map is too large, you can define multiple areas.
 
 var zone = new AoiZone();
 
-// AOI的显示区域、每个客户端都可以单独定义区域、这样可以更好的适用于不同的分辨率。
+// The display area of ​​AOI can be defined individually by each client, which can better adapt to different resolutions.
 
 var area = new Vector2(3, 3);
 
-// 添加50个玩家。
+// Add 50 players.
 
 for (var i = 1; i <= 50; i++) zone.Enter(i, i, i);
 
-// 刷新key为3的信息。
+// Refresh the information with key 3.
 
 zone.Refresh(3, area, out var enters);
 
-Console.WriteLine("---------------加入玩家范围的玩家列表--------------");
+Console.WriteLine("---------------List of players that have joined the player scope--------------");
 
 foreach (var aoiKey in enters)
 {
@@ -31,11 +31,11 @@ foreach (var aoiKey in enters)
     Console.WriteLine($"X:{findEntity.X.Value} Y:{findEntity.Y.Value}");
 }
 
-// 更新key为3的坐标。
+// Update the coordinates of key 3.
 
 var entity = zone.Refresh(3, 20, 20, new Vector2(3, 3), out enters);
 
-Console.WriteLine("---------------离开玩家范围的玩家列表--------------");
+Console.WriteLine("---------------List of players who have left player range--------------");
 
 foreach (var aoiKey in entity.Leave)
 {
@@ -43,7 +43,7 @@ foreach (var aoiKey in entity.Leave)
     Console.WriteLine($"X:{findEntity.X.Value} Y:{findEntity.Y.Value}");
 }
 
-Console.WriteLine("---------------key为3移动后加入玩家范围的玩家列表--------------");
+Console.WriteLine("---------------Key 3 is the list of players that join the player range after moving--------------");
 
 foreach (var aoiKey in enters)
 {
@@ -51,12 +51,12 @@ foreach (var aoiKey in enters)
     Console.WriteLine($"X:{findEntity.X.Value} Y:{findEntity.Y.Value}");
 }
 
-// 离开当前AOI
+// Leave the current AOI
 
 zone.Exit(50);
 ```
 
 
-# 2、博客文章
+# 2. Blog Post
 
-[AOI算法实现和原理（一）](https://zhuanlan.zhihu.com/p/56114206) [AOI算法实现和原理（二）](https://zhuanlan.zhihu.com/p/345741408)
+[AOI algorithm implementation and principle（一）](https://zhuanlan.zhihu.com/p/56114206) [AOI algorithm implementation and principle（二）](https://zhuanlan.zhihu.com/p/345741408)

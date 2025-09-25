@@ -74,7 +74,7 @@ namespace GameServer.MapSystem
         }
 
         /// <summary>
-        /// 广播实体进入场景
+        /// Broadcast entity enters the scene
         /// </summary>
         public void EntityEnter(Entity entity)
         {
@@ -85,11 +85,11 @@ namespace GameServer.MapSystem
             var res = new EntityEnterResponse();
             res.Datas.Add(ConstructEntityEnterData(entity));
 
-            // 向能观察到新实体的角色广播新实体加入场景
+            // Broadcasts the addition of a new entity to the scene to all characters that can observe it.
             PlayerManager.Broadcast(res, entity);
 
-            // 如果新实体是玩家
-            // 向新玩家投递已在场景中的在其可视范围内的实体
+            // If the new entity is a player
+            // Deliver entities already in the scene to the new player that are within their visual range.
             if (entity.EntityType == EntityType.Player)
             {
                 res.Datas.Clear();
@@ -119,15 +119,15 @@ namespace GameServer.MapSystem
         }
 
         /// <summary>
-        ///  广播实体离开场景
+        ///  The broadcasting entity leaves the scene
         /// </summary>
         public void EntityLeave(Entity entity)
         {
             Log.Information($"{entity}离开{entity.Map}");
 
-            // 向能观察到实体的角色广播实体离开场景
-            // 实际上直接广播是向当前entity的关注实体广播而非关注当前entity的实体
-            // 如果所有实体的视野范围一致则没有这个问题，但如果不一致的话，需要考虑另行维护
+            // Broadcasts that the entity has left the scene to all characters that can observe it.
+            // In fact, direct broadcast is broadcast to the entity that follows the current entity rather than the entity that follows the current entity.
+            // If the field of view of all entities is consistent, there will be no problem, but if it is inconsistent, you need to consider additional maintenance
             var res = new EntityLeaveResponse();
             res.EntityIds.Add(entity.EntityId);
             PlayerManager.Broadcast(res, entity);
@@ -135,7 +135,7 @@ namespace GameServer.MapSystem
         }
 
         /// <summary>
-        /// 同步实体位置并向能观察到该实体的玩家广播消息
+        /// Synchronizes the entity's position and broadcasts a message to players who can observe the entity.
         /// </summary>
         /// <param name="entity"></param>
         public void EntityRefreshPosition(Entity entity)
@@ -156,8 +156,8 @@ namespace GameServer.MapSystem
                         enterRes.Datas.Clear();
                         init1 = true;
                     }
-                    // 如果移动的是玩家，还需要向该玩家通知所有新加入视野范围的实体
-                    // Log.Debug($"[Map.EntityRefreshPosition]2.实体：{entityId} 进入了 实体：{entity.EntityId} 的视距范围");
+                    // If the player is moving, the player also needs to be notified of all new entities that have entered the field of view.
+                    // Log.Debug($"[Map.EntityRefreshPosition]2.entity：{entityId} 进入了 entity：{entity.EntityId} Line of sight range");
                     if (entity.EntityType != EntityType.Player) return;
                     var enterEntity = EntityManager.Instance.GetEntity(entityId);
                     Debug.Assert(enterEntity != null);
@@ -170,8 +170,8 @@ namespace GameServer.MapSystem
                         leaveRes.EntityIds.Clear();
                         init2 = true;
                     }
-                    // 如果移动的是玩家，还需要向该玩家通知所有退出其视野范围的实体
-                    // Log.Debug($"[Map.EntityRefreshPosition]2.实体：{entityId} 离开了 实体：{entity.EntityId} 的视距范围");
+                    // If the player is moving, the player also needs to be notified of all entities that have left their field of view.
+                    // Log.Debug($"[Map.EntityRefreshPosition]2.实体：{entityId} left the entity：{entity.EntityId} Line of sight range");
                     if (entity.EntityType != EntityType.Player) return;
                     var leaveEntity = EntityManager.Instance.GetEntity(entityId);
                     Debug.Assert(leaveEntity != null);
@@ -179,8 +179,8 @@ namespace GameServer.MapSystem
                 },
                 entityId =>
                 {
-                    // 如果进入了一个玩家的视距范围，则向其通知有实体加入
-                    // Log.Debug($"[Map.EntityRefreshPosition]1.实体：{entity.EntityId} 进入了 实体：{entityId} 的视距范围");
+                    // If a player enters line of sight, notify them that an entity has joined
+                    // Log.Debug($"[Map.EntityRefreshPosition]1.entity：{entity.EntityId} Entered the entity：{entityId} Line of sight range");
                     var enterEntity = EntityManager.Instance.GetEntity(entityId);
                     Debug.Assert(enterEntity != null);
                     if (enterEntity.EntityType != EntityType.Player) return;
@@ -191,8 +191,8 @@ namespace GameServer.MapSystem
                 },
                 entityId =>
                 {
-                    // 如果离开了一个玩家的视距范围，则向其通知有实体退出
-                    // Log.Debug($"[Map.EntityRefreshPosition]1.实体：{entity.EntityId} 离开了 实体：{entityId} 的视距范围");
+                    // If a player leaves line of sight, notify them that an entity has exited.
+                    // Log.Debug($"[Map.EntityRefreshPosition]1.entity：{entity.EntityId} left the entity：{entityId} Line of sight range");
                     var leaveEntity = EntityManager.Instance.GetEntity(entityId);
                     Debug.Assert(leaveEntity != null);
                     if (leaveEntity.EntityType != EntityType.Player) return;
@@ -218,7 +218,7 @@ namespace GameServer.MapSystem
         }
 
         /// <summary>
-        /// 获取指定实体视距范围内实体
+        /// Get entities within the specified entity's sight range
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="condition"></param>
@@ -233,7 +233,7 @@ namespace GameServer.MapSystem
         }
 
         /// <summary>
-        /// 按半径获取指定实体视距范围内实体
+        /// Get entities within the specified entity's sight range by radius
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="condition"></param>
@@ -244,7 +244,7 @@ namespace GameServer.MapSystem
 
 
         /// <summary>
-        /// 获取指定实体视距范围内实体
+        /// Get entities within the specified entity's sight range
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="condition"></param>
@@ -287,7 +287,7 @@ namespace GameServer.MapSystem
         }
 
         /// <summary>
-        /// 根据网络实体对象更新实体并广播新状态
+        /// Update the entity based on the network entity object and broadcast the new state
         /// </summary>
         public void EntityTransformSync(int entityId, NetTransform transform, int stateId, ByteString data)
         {
@@ -306,12 +306,12 @@ namespace GameServer.MapSystem
                 Data = data
             };
 
-            // 向所有角色广播新实体的状态更新
+            // Broadcasts the new entity's status update to all actors
             PlayerManager.Broadcast(response, entity);
         }
 
         /// <summary>
-        /// 根据服务器实体对象更新实体并广播新状态
+        /// Update the entity based on the server entity object and broadcast the new state
         /// </summary>
         public void EntitySync(int entityId, int stateId)
         {
@@ -331,7 +331,7 @@ namespace GameServer.MapSystem
                 Data = null
             };
 
-            // 向所有角色广播新实体的状态更新
+            // Broadcasts the new entity's status update to all actors
             PlayerManager.Broadcast(response, entity);
         }
 

@@ -36,23 +36,23 @@ namespace GameServer.Network
 
         private void OnWarningOccur(object? sender, WarningOccurEventArgs e)
         {
-            Log.Warning($"[Channel:{this}] 出现警告:{e.Description}");
+            Log.Warning($"[Channel:{this}] A warning appears:{e.Description}");
         }
 
         private void OnErrorOccur(object? sender, ErrorOccurEventArgs e)
         {
-            Log.Error($"[Channel:{this}] 出现异常:{e.Exception}");
+            Log.Error($"[Channel:{this}] Exception occurred:{e.Exception}");
         }
 
         private void OnConnectionClosed(object? sender, ConnectionClosedEventArgs e)
         {
             if (e.IsManual)
             {
-                Log.Information($"[Channel:{this}] 由服务器关闭链接");
+                Log.Information($"[Channel:{this}] Connection closed by server");
             }
             else
             {
-                Log.Information($"[Channel:{this}] 对端关闭链接");
+                Log.Information($"[Channel:{this}] The peer closes the connection");
             }
         }
 

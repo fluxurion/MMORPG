@@ -13,7 +13,7 @@ namespace GameServer.Tool
         public static readonly float Rad2Deg = 180 / (float)Math.PI;
 
         /// <summary>
-        /// 方向向量转欧拉角
+        /// Direction vector to Euler angle
         /// </summary>
         /// <param name="direction"></param>
         /// <returns></returns>

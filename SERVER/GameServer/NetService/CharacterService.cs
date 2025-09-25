@@ -33,10 +33,10 @@ namespace GameServer.NetService
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}角色创建请求");
+                Log.Debug($"{sender}Role creation request");
                 if (sender.User == null)
                 {
-                    Log.Debug($"{sender}角色创建失败：用户未登录");
+                    Log.Debug($"{sender}Role creation failed: User not logged in");
                     return;
                 }
                 var count = SqlDb.FreeSql.Select<DbCharacter>()
@@ -45,12 +45,12 @@ namespace GameServer.NetService
                 if (count >= 4)
                 {
                     sender.Send(new CharacterCreateResponse() { Error = NetError.CharacterCreationLimitReached });
-                    Log.Debug($"{sender}角色创建失败：创建的角色已满");
+                    Log.Debug($"{sender}Role creation failed: The role to be created is full");
                     return;
                 }
                 if (!StringHelper.NameVerify(request.Name))
                 {
-                    Log.Debug($"{sender}角色创建失败：角色名称非法");
+                    Log.Debug($"{sender}Character creation failed: Illegal character name");
                     sender.Send(new CharacterCreateResponse() { Error = NetError.IllegalCharacterName });
                     return;
                 }
@@ -60,7 +60,7 @@ namespace GameServer.NetService
                 if (dbCharacter != null)
                 {
                     sender.Send(new CharacterCreateResponse() { Error = NetError.RepeatCharacterName });
-                    Log.Debug($"{sender}角色创建失败：角色名已存在");
+                    Log.Debug($"{sender}Character creation failed: Character name already exists");
                     return;
                 }
 
@@ -88,7 +88,7 @@ namespace GameServer.NetService
                 if (characterId == 0)
                 {
                     sender.Send(new CharacterCreateResponse() { Error = NetError.UnknowError });
-                    Log.Debug($"{sender}角色创建失败：数据库错误");
+                    Log.Debug($"{sender}Character creation failed: Database error");
                     return;
                 }
 
@@ -98,7 +98,7 @@ namespace GameServer.NetService
                     Character = newDbCharacter.ToNetCharacter(),
                     Error = NetError.Success
                 });
-                Log.Debug($"{sender}角色创建成功");
+                Log.Debug($"{sender}Role created successfully");
             
             });
         }
@@ -107,10 +107,10 @@ namespace GameServer.NetService
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}角色列表查询请求");
+                Log.Debug($"{sender}Role list query request");
                 if (sender.User == null)
                 {
-                    Log.Debug($"{sender}角色列表查询失败：用户未登录");
+                    Log.Debug($"{sender}Role list query failed: User not logged in");
                     return;
                 }
 
@@ -124,7 +124,7 @@ namespace GameServer.NetService
                 }
 
                 sender.Send(res, null);
-                Log.Debug($"{sender}角色列表查询成功");
+                Log.Debug($"{sender}Role list query successful");
             });
         }
 
@@ -132,10 +132,10 @@ namespace GameServer.NetService
         {
             UpdateManager.Instance.AddTask(() =>
             {
-                Log.Debug($"{sender}角色删除请求");
+                Log.Debug($"{sender}Role deletion request");
                 if (sender.User == null)
                 {
-                    Log.Debug($"{sender}角色删除失败：用户未登录");
+                    Log.Debug($"{sender}Role deletion failed: User not logged in");
                     return;
                 }
 
@@ -144,7 +144,7 @@ namespace GameServer.NetService
                     .Where(t => t.Id == request.CharacterId)
                     .ExecuteAffrows();
                 sender.Send(new CharacterDeleteResponse() { Error = NetError.Success });
-                Log.Debug($"{sender}角色删除成功");
+                Log.Debug($"{sender}Role deleted successfully");
             });
         }
 

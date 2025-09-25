@@ -52,11 +52,11 @@ namespace AOI.Old
                 {
                     for (var i = 0; i < _skipCount; i++)
                     {
-                        // 移动快指针
+                        // Move fast pointer
 
                         var fastCursor = FastCursor(skip, slowCursor?.Value);
 
-                        // 如果快指针的值小于插入的值，把快指针赋给慢指针，当做当前指针。
+                        // If the value of the fast pointer is less than the inserted value, assign the fast pointer to the slow pointer and use it as the current pointer.
 
                         if (fastCursor.Value.Position.X < node.Position.X)
                         {
@@ -65,7 +65,7 @@ namespace AOI.Old
                             continue;
                         }
 
-                        // 慢指针移动到快指针位置
+                        // The slow pointer moves to the fast pointer position
 
                         while (slowCursor != null)
                         {
@@ -108,11 +108,11 @@ namespace AOI.Old
                 {
                     for (var i = 0; i < _skipCount; i++)
                     {
-                        // 移动快指针
+                        // Move fast pointer
 
                         var fastCursor = FastCursor(skip, slowCursor?.Value);
 
-                        // 如果快指针的值小于插入的值，把快指针赋给慢指针，当做当前指针。
+                        // If the value of the fast pointer is less than the inserted value, assign the fast pointer to the slow pointer and use it as the current pointer.
 
                         if (fastCursor.Value.Position.Y <= node.Position.Y)
                         {
@@ -121,7 +121,7 @@ namespace AOI.Old
                             continue;
                         }
 
-                        // 慢指针移动到快指针位置
+                        // The slow pointer moves to the fast pointer position
 
                         while (slowCursor != null)
                         {
