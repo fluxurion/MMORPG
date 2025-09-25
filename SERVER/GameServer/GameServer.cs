@@ -8,6 +8,8 @@ using System.Diagnostics;
 using MMORPG.Common.Tool;
 using GameServer.Manager;
 using Serilog;
+using GameServer.Db;
+using GameServer.Config;
 
 namespace GameServer
 {
@@ -27,7 +29,30 @@ namespace GameServer
 
         public async Task Run()
         {
-            Log.Information("[Server] Start the server");
+            Log.Information("[Server] Starting the server.");
+
+            // Database connection test
+            try
+            {
+                Log.Information("[Server] Testing database connection...");
+                var result = SqlDb.FreeSql.Ado.ExecuteScalar("SELECT 1");
+                if (Convert.ToInt32(result) == 1)
+                {
+                    Log.Information("[Server] Database connection successful.");
+                }
+                else
+                {
+                    Log.Warning("[Server] Database connection test did not return expected result.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("[Server] Database connection failed! See DBErrors.log for details.");
+                LoggingConfig.LogDbError(ex, "[Server] Database connection failed!");
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
+                Environment.Exit(1);
+            }
 
             Log.Information("[Server] Start initializing Manager...");
             UpdateManager.Instance.Start();
