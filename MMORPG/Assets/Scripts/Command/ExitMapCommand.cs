@@ -19,7 +19,7 @@ namespace MMORPG.Command
             var model = this.GetModel<IMapModel>();
 
             Debug.Assert(model.CurrentMapId.Value != -1);
-            Log.Information($"退出地图:{model.CurrentMapId}");
+            Log.Information($"Exit map:{model.CurrentMapId}");
             model.CurrentMapId.Value = -1;
             var net = this.GetSystem<INetworkSystem>();
             var playerManager = this.GetSystem<IPlayerManagerSystem>();

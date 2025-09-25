@@ -13,7 +13,7 @@ namespace MMORPG.Game
 
         protected override void OnEnter()
         {
-            Log.Information("初始化工具");
+            Log.Information("Initialization tool");
             new GameObject(nameof(UIToolController)).AddComponent<UIToolController>();
             mFSM.ChangeState(LaunchStatus.InitNetwork);
         }

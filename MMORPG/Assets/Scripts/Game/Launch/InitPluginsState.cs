@@ -16,7 +16,7 @@ namespace MMORPG.Game
 
         protected override void OnEnter()
         {
-            Log.Information("初始化插件");
+            Log.Information("Initialize plugin");
             // ResKit.Init();
             new GameObject(nameof(UnityMainThreadDispatcher)).AddComponent<UnityMainThreadDispatcher>();
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MMORPG.Tool
 {
     /// <summary>
-    /// 辅助面板切换
+    /// Auxiliary panel switching
     /// </summary>
     public static class PanelHelper
     {
@@ -21,7 +21,7 @@ namespace MMORPG.Tool
         }
 
         /// <summary>
-        /// 渐变显示
+        /// Gradient display
         /// </summary>
         public static void FadeIn(
             GameObject target,
@@ -46,12 +46,12 @@ namespace MMORPG.Tool
         }
 
         /// <summary>
-        /// 渐变隐藏
+        /// Gradient hidden
         /// </summary>
         /// <param name="target"></param>
-        /// <param name="duration">持续时间</param>
-        /// <param name="autoActive">是否自动设置active</param>
-        /// <param name="onComplete">渐变完成</param>
+        /// <param name="duration">duration</param>
+        /// <param name="autoActive">Whether to automatically set active</param>
+        /// <param name="onComplete">Gradient completed</param>
         public static void FadeOut(
             GameObject target,
             float duration = 0.3f,

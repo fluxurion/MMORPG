@@ -32,12 +32,12 @@ namespace MMORPG.Game
 
         private void OnWannaJoinMap(WannaJoinMapEvent e)
         {
-            //TODO 根据MapId加载地图
+            //TODO Load the map based on MapId
             var op = SceneManager.LoadSceneAsync("Space1Scene");
 
             op.completed += operation =>
             {
-                Log.Information("初始化地图");
+                Log.Information("Initialize map");
                 var group = new GameObject("Managers(Auto Create)").transform;
 
                 var entityManager = new GameObject(nameof(EntityManager)).AddComponent<EntityManager>();
@@ -57,7 +57,7 @@ namespace MMORPG.Game
 
         protected override void OnEnter()
         {
-            Log.Information("开始等待加入地图");
+            Log.Information("Start waiting to join the map");
         }
 
         public IArchitecture GetArchitecture()

@@ -25,17 +25,17 @@ namespace MMORPG.Command
             var box = this.GetSystem<IBoxSystem>();
             if (_username.Length < 4 || _username.Length > 12)
             {
-                box.ShowNotification("用户名长度必须在4-12字之间!");
+                box.ShowNotification("Username length must be between 4 and 12 characters!");
                 return;
             }
 
             if (_password.Length < 8 || _password.Length > 16)
             {
-                box.ShowNotification("密码长度必须在8-16字之间!");
+                box.ShowNotification("The password must be between 8 and 16 characters long!");
                 return;
             }
 
-            box.ShowSpinner("登录中......");
+            box.ShowSpinner("Logging in......");
             var net = this.GetSystem<INetworkSystem>();
             net.SendToServer(new LoginRequest
             {
@@ -47,15 +47,15 @@ namespace MMORPG.Command
 
             if (response.Error == NetError.Success)
             {
-                Log.Information($"'{_username}'登录成功");
+                Log.Information($"'{_username}'Login successful");
                 var user = this.GetModel<IUserModel>();
                 user.Username.Value = _username;
                 SceneManager.LoadScene("CharacterSelectScene");
             }
             else
             {
-                Log.Error($"'{_username}'登录失败:{response.Error.GetInfo().Description}");
-                box.ShowNotification($"登录失败!\n原因:{response.Error.GetInfo().Description}");
+                Log.Error($"'{_username}'Login failed:{response.Error.GetInfo().Description}");
+                box.ShowNotification($"Login failed!\n reason:{response.Error.GetInfo().Description}");
             }
         }
     }

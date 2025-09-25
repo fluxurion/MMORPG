@@ -17,8 +17,8 @@ using UnityEngine.SceneManagement;
 namespace MMORPG.Game
 {
     /// <summary>
-    /// 地图控制器
-    /// 负责监听在当前地图中创建角色的事件并将角色加入到地图
+    /// Map Controller
+    /// Responsible for listening for character creation events in the current map and adding characters to the map
     /// </summary>
     public class MapManager : MonoBehaviour, IController, ICanSendEvent
     {
@@ -50,7 +50,7 @@ namespace MMORPG.Game
                 if (response.Error != Common.Proto.Base.NetError.Success)
                 {
                     Log.Error($"JoinMap Error:{response.Error.GetInfo().Description}");
-                    //TODO Error处理
+                    //TODO Error handling
                     return;
                 }
 
@@ -59,14 +59,14 @@ namespace MMORPG.Game
                 var unitDefine = _dataManager.GetUnitDefine(response.UnitId);
 
                 var position = response.Transform.Position.ToVector3();
-                // 进行射线检测，确保实体不会卡在地下
-                var rayStart = position + Vector3.up * 100f; // 从高处向下发射射线
+                // Perform radiographic testing to ensure entities are not stuck underground
+                var rayStart = position + Vector3.up * 100f; // Shooting rays downward from a height
                 var ray = new Ray(rayStart, Vector3.down);
                 var layerMask = LayerMask.GetMask("Map", "Terrain");
                 if (Physics.Raycast(ray, out var hit, 200f, layerMask))
                 {
-                    // 如果检测到地面，将y轴位置调整到地面上方
-                    position.y = hit.point.y + 0.1f; // 稍微抬高一点，避免完全贴地
+                    // If the ground is detected, adjust the y-axis position to be above the ground
+                    position.y = hit.point.y + 0.1f; // Raise it slightly to avoid touching the ground completely
                 }
 
                 var entity = _entityManager.SpawnEntity(

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MMORPG.Tool
 {
     /// <summary>
-    /// 通知框显示位置
+    /// Notification box display position
     /// </summary>
     public enum NotificationBoxPosition
     {
@@ -16,19 +16,19 @@ namespace MMORPG.Tool
     }
 
     /// <summary>
-    /// 通知框出现样式
+    /// Notification box appearance style
     /// </summary>
     public enum NotificationBoxStyle
     {
-        Fading, // 渐变
-        Popup, // 弹出
-        Sliding // 滑动
+        Fading, // Gradient
+        Popup, // pop up
+        Sliding // slide
     }
 
     public record NotificationBoxConfig
     {
-        public string Title = "通知";
-        public string Description = "我是一个通知框";
+        public string Title = "Notify";
+        public string Description = "I am a notification box";
         public NotificationBoxPosition Position = NotificationBoxPosition.TopRight;
         public NotificationBoxStyle Style = NotificationBoxStyle.Sliding;
     }

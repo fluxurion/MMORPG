@@ -61,7 +61,7 @@ namespace MMORPG.Game
             }
             else
             {
-                EditorUtility.DisplayDialog("错误", $"没有SkillId:{WeaponId}", "确认");
+                EditorUtility.DisplayDialog("mistake", $"No SkillId:{WeaponId}", "confirm");
             }
         }
 
@@ -101,7 +101,7 @@ namespace MMORPG.Game
                 return $"{f:0}";
             }
 
-            // 如果小数点后第2位很小, 直接舍弃
+            // If the second decimal place is very small, discard it directly
             if (Mathf.Abs(f - Mathf.Round(f * 10f) / 10f) < 0.05f)
             {
                 return $"{f:0.0}";

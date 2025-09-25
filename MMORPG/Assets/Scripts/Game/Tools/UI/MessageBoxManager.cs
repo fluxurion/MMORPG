@@ -7,28 +7,28 @@ namespace MMORPG.Tool
 {
     public enum MessageBoxStyle
     {
-        LongDesc, // 用于显示长消息
-        ShortDesc // 用于显示短消息, 适合只有两行文本的
+        LongDesc, // Used to display long messages
+        ShortDesc // Used to display short messages, suitable for only two lines of text
     }
 
     public enum MessageBoxResult
     {
-        Confirm, // 确认
-        Cancel // 取消
+        Confirm, // confirm
+        Cancel // Cancel
     }
 
     /// <summary>
-    /// 消息框的配置
+    /// Message box configuration
     /// </summary>
     public class MessageBoxConfig
     {
-        public string Title = "提示";
-        public string Description = "我是一个消息框";
-        public string ConfirmButtonText = "确认";
-        public string CancalButtonText = "取消";
+        public string Title = "Hint";
+        public string Description = "i am a message box";
+        public string ConfirmButtonText = "Confirm";
+        public string CancalButtonText = "Cancel";
         public bool ShowConfirmButton = true;
         public bool ShowCancalButton = false;
-        public Action<MessageBoxResult> OnChose = null; // 当用户选择了"确认"或"取消"的其中一个按钮
+        public Action<MessageBoxResult> OnChose = null; // When the user selects one of the "Confirm" or "Cancel" buttons
         public Action OnOpen = null;
         public TaskCompletionSource<MessageBoxResult> OnChoseTcs = null;
         public MessageBoxStyle Style = MessageBoxStyle.LongDesc;
@@ -74,7 +74,7 @@ namespace MMORPG.Tool
         public void Show()
         {
             if (IsShowing)
-                throw new Exception("当前已有MessageBox正在显示!");
+                throw new Exception("There is currently a MessageBox being displayed!");
 
             var window = GetWindow();
             window.titleText = Config.Title;

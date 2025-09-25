@@ -35,9 +35,9 @@ namespace MMORPG.Game
             if (_tipDict == null)
             {
                 _tipDict = new();
-                _tipDict["疑问"] = Resources.Load<GameObject>("Prefabs/Effect/Npc/IconWhiteQuestion");
-                _tipDict["感叹"] = Resources.Load<GameObject>("Prefabs/Effect/Npc/IconWhiteExclamation");
-                _tipDict["星号"] = Resources.Load<GameObject>("Prefabs/Effect/Npc/IconWhiteReward");
+                _tipDict["doubt"] = Resources.Load<GameObject>("Prefabs/Effect/Npc/IconWhiteQuestion");
+                _tipDict["sigh"] = Resources.Load<GameObject>("Prefabs/Effect/Npc/IconWhiteExclamation");
+                _tipDict["asterisk"] = Resources.Load<GameObject>("Prefabs/Effect/Npc/IconWhiteReward");
             }
 
             this.RegisterEvent<InteractEvent>(e =>
@@ -63,7 +63,7 @@ namespace MMORPG.Game
 
         private void LoadTip(int dialogueId)
         {
-            // 挂载头顶特效
+            // Mount overhead special effects
             if (_tip != null)
             {
                 Destroy(_tip);
@@ -79,7 +79,7 @@ namespace MMORPG.Game
             Log.Information($"{dialogueDefine.TipResource} - {_tipDict[dialogueDefine.TipResource]}");
             _tip = Instantiate(_tipDict[dialogueDefine.TipResource], transform);
 
-            // 获取CapsuleCollider来确定NPC的高度
+            // Get CapsuleCollider to confirm NPC height
             CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
             if (capsuleCollider != null)
             {
@@ -88,7 +88,7 @@ namespace MMORPG.Game
             }
             else
             {
-                // 如果没有CapsuleCollider，可以设定一个默认高度或其他处理方式
+                // if not CapsuleCollider，You can set a default height or other processing methods
                 _tip.transform.localPosition = new Vector3(0, 2, 0);
             }
 

@@ -23,7 +23,7 @@ namespace MMORPG.Tool
             //PacketReceived += OnPacketReceived;
         }
 
-        ////TODO 高水位处理
+        ////TODO High water level treatment
         //private List<Packet> _receivedPackets = new List<Packet>();
         //private TaskCompletionSource<bool> _receivedPacketTSC = new TaskCompletionSource<bool>();
 
@@ -57,7 +57,7 @@ namespace MMORPG.Tool
 
         //private void OnPacketReceived(object? sender, PacketReceivedEventArgs e)
         //{
-        //    Log.Information($"[Channel] 接收数据包:{e.Packet.Message.GetType()}");
+        //    Log.Information($"[Channel] receive packet:{e.Packet.Message.GetType()}");
         //    if (ProtoManager.Instance.IsEmergency(e.Packet.Message.GetType()))
         //    {
         //        EmergencyPacketReceived?.Invoke(this, new EmergencyPacketReceivedEventArgs(e.Packet));
@@ -73,23 +73,23 @@ namespace MMORPG.Tool
 
         private void OnErrorOccur(object sender, ErrorOccurEventArgs e)
         {
-            Log.Error($"出现异常:{e.Exception}");
+            Log.Error($"Exception occurred:{e.Exception}");
         }
 
         private void OnWarningOccur(object sender, WarningOccurEventArgs e)
         {
-            Log.Warning($"出现警告:{e.Description}");
+            Log.Warning($"A warning appears:{e.Description}");
         }
 
         private void OnConnectionClosed(object sender, ConnectionClosedEventArgs e)
         {
             if (e.IsManual)
             {
-                Log.Information($"关闭对服务器端的链接!");
+                Log.Information($"Close the connection to the server!");
             }
             else
             {
-                Log.Information($"对端关闭链接");
+                Log.Information($"The peer closes the connection");
             }
         }
     }

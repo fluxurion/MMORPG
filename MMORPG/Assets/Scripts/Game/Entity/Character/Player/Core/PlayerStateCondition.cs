@@ -12,7 +12,7 @@ namespace MMORPG.Game
     [Serializable]
     public class PlayerStateCondition
     {
-        [Information("无效函数!", InfoMessageType.Error, "CheckMethodNameInvalid")]
+        [Information("Invalid function!", InfoMessageType.Error, "CheckMethodNameInvalid")]
         [ValueDropdown("GetStateConditionsDropdown")]
         [VerticalGroup("Method")]
         [HideLabel]

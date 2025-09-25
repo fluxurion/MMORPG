@@ -262,7 +262,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -270,6 +269,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!850595691 &962762856
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.500061, y: 0.0048828125}
-  m_SizeDelta: {x: 3840, y: 2568}
+  m_SizeDelta: {x: 4773, y: 3192}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908162460
 MonoBehaviour:
@@ -749,6 +749,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &114009023404930730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,7 +878,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -885,6 +885,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!223 &223938889073707650
 Canvas:
   m_ObjectHideFlags: 0
@@ -1397,6 +1398,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2834580338853011545, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: Log in
+      objectReference: {fileID: 0}
     - target: {fileID: 3523095090520543721, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1425,6 +1430,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3523095090520543723, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: Remember me
+      objectReference: {fileID: 0}
     - target: {fileID: 3523095090893779477, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1489,6 +1498,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744610766686139051, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: forget the password
+      objectReference: {fileID: 0}
     - target: {fileID: 6744610766686139092, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1541,6 +1554,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744610767432248006, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: Create Account
+      objectReference: {fileID: 0}
     - target: {fileID: 6744610767973557137, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1552,6 +1569,10 @@ PrefabInstance:
     - target: {fileID: 6744610767973557137, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744610767973557140, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: need help
       objectReference: {fileID: 0}
     - target: {fileID: 6744610768117517342, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1600,6 +1621,14 @@ PrefabInstance:
     - target: {fileID: 6744610768271910059, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6764445135899441630, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: username
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188412662260666212, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
+      propertyPath: m_Text
+      value: password
       objectReference: {fileID: 0}
     - target: {fileID: 8538169427089059546, guid: 4162062e00235d64dad863ffbe8d5508, type: 3}
       propertyPath: m_Name

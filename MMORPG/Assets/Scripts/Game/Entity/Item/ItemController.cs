@@ -16,19 +16,19 @@ public class ItemController : MonoBehaviour, IController
         if (_essenceDict == null)
         {
             _essenceDict = new();
-            _essenceDict["普通"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemWhiteEssence");
-            _essenceDict["非凡"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemGreenEssence");
-            _essenceDict["稀有"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemBlueEssence");
-            _essenceDict["史诗"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemPurpleEssence");
-            _essenceDict["传说"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemOrangeEssence");
-            _essenceDict["传说"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemRedEssence");
+            _essenceDict["usually"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemWhiteEssence");
+            _essenceDict["extraordinary"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemGreenEssence");
+            _essenceDict["rare"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemBlueEssence");
+            _essenceDict["epic"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemPurpleEssence");
+            _essenceDict["legend"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemOrangeEssence");
+            _essenceDict["legend"] = Resources.Load<GameObject>("Prefabs/Effect/Essence/ItemRedEssence");
         }
 
         var pos = transform.position;
         pos.y = 20;
         transform.position = CalculateGroundPosition(pos, LayerMask.NameToLayer("Terrain"));
 
-        // 找到物品品质
+        // Find item quality
         var dataManagerSystem = this.GetSystem<IDataManagerSystem>();
         var itemDefine = dataManagerSystem.GetUnitItemDefine(EntityView.UnitDefine.ID);
         var essence = Instantiate(_essenceDict[itemDefine.Quality], transform);

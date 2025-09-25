@@ -26,21 +26,21 @@ namespace MMORPG.Command
             var box = this.GetSystem<IBoxSystem>();
             if (_username.Length is < 4 or > 12)
             {
-                box.ShowNotification("用户名长度必须在4-12字之间!");
+                box.ShowNotification("Username must be between 4 and 12 characters long!");
                 return;
             }
             if (_password.Length is < 8 or > 16)
             {
-                box.ShowNotification("密码长度必须在8-16字之间!");
+                box.ShowNotification("The password must be between 8 and 16 characters long!");
                 return;
             }
             if (_password != _password2)
             {
-                box.ShowNotification("两次密码输入不相同!");
+                box.ShowNotification("The two passwords you entered are different!");
                 return;
             }
 
-            box.ShowSpinner("注册中......");
+            box.ShowSpinner("Registering......");
             var net = this.GetSystem<INetworkSystem>();
             net.SendToServer(new RegisterRequest
             {
@@ -52,13 +52,13 @@ namespace MMORPG.Command
 
             if (response.Error == NetError.Success)
             {
-                Log.Information($"'{_username}'注册成功!");
-                box.ShowNotification("注册成功!");
+                Log.Information($"'{_username}'Registration successful!");
+                box.ShowNotification("Registration successful!");
             }
             else
             {
-                Log.Information($"'{_username}'注册失败:{response.Error.GetInfo().Description}");
-                box.ShowNotification($"注册失败!\n原因:{response.Error.GetInfo().Description}");
+                Log.Information($"'{_username}'Registration failed:{response.Error.GetInfo().Description}");
+                box.ShowNotification($"Registration failed!\n reason:{response.Error.GetInfo().Description}");
             }
         }
     }

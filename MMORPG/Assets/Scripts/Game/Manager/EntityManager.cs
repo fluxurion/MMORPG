@@ -56,7 +56,7 @@ namespace MMORPG.Game
                 var actor = entity.GetComponent<ActorController>();
                 foreach (var entry in response.Entrys)
                 {
-                    Log.Debug($"{actor.gameObject.name}属性同步:{entry.Type}");
+                    Log.Debug($"{actor.gameObject.name}Property synchronization:{entry.Type}");
                     switch (entry.Type)
                     {
                         case EntityAttributeEntryType.Level:
@@ -101,11 +101,11 @@ namespace MMORPG.Game
                 if (_entityManager.EntityDict.TryGetValue(response.Info.AttackerInfo.AttackerId, out var attacker))
                 {
                     attacker.OnHit?.Invoke(response.Info);
-                    Log.Information($"'{wounded.gameObject.name}'受到'{attacker.gameObject.name}'的{response.Info.AttackerInfo.AttackerType}攻击, 扣除{response.Info.Amount}点血量");
+                    Log.Information($"'{wounded.gameObject.name}'receive'{attacker.gameObject.name}'of{response.Info.AttackerInfo.AttackerType}Attack, Deduction{response.Info.Amount}Point blood volume");
                 }
                 else
                 {
-                    Log.Information($"'{wounded.gameObject.name}'受到EntityId:{response.Info.AttackerInfo.AttackerId}(已离开视野范围)的{response.Info.AttackerInfo.AttackerType}攻击({response.Info.DamageType}), 扣除{response.Info.Amount}点血量");
+                    Log.Information($"'{wounded.gameObject.name}'receive EntityId:{response.Info.AttackerInfo.AttackerId}(Out of sight){response.Info.AttackerInfo.AttackerType}attack({response.Info.DamageType}), deduct{response.Info.Amount}Point blood volume");
                 }
 
                 wounded.OnHurt?.Invoke(response.Info);
@@ -127,22 +127,22 @@ namespace MMORPG.Game
 
         private async void OnEntityEnterReceived(EntityEnterResponse response)
         {
-            // 等待主玩家先加入游戏
+            // Wait for the main player to join the game first
             await _playerManager.GetMineEntityTask();
             foreach (var data in response.Datas)
             {
                 var entityId = data.EntityId;
                 var position = data.Transform.Position.ToVector3();
                 var rotation = Quaternion.Euler(data.Transform.Direction.ToVector3());
-                
-                // 进行射线检测，确保实体不会卡在地下
-                var rayStart = position + Vector3.up * 100f; // 从高处向下发射射线
+
+                // Perform radiographic testing to ensure entities are not stuck underground
+                var rayStart = position + Vector3.up * 100f; // Shooting rays downward from a height
                 var ray = new Ray(rayStart, Vector3.down);
                 var layerMask = LayerMask.GetMask("Map", "Terrain");
                 if (Physics.Raycast(ray, out var hit, 200f, layerMask))
                 {
-                    // 如果检测到地面，将y轴位置调整到地面上方
-                    position.y = hit.point.y + 0.1f; // 稍微抬高一点，避免完全贴地
+                    // If the ground is detected, adjust the y-axis position to be above the ground
+                    position.y = hit.point.y + 0.1f; // Raise it slightly to avoid touching the ground completely
                 }
                 
                 var unitDefine = _dataManager.GetUnitDefine(data.UnitId);

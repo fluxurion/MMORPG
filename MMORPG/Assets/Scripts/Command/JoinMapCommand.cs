@@ -23,7 +23,7 @@ namespace MMORPG.Command
         {
             var model = this.GetModel<IMapModel>();
             Debug.Assert(model.CurrentMapId.Value == -1);
-            Log.Information($"{CharacterId}加入地图:{MapId}");
+            Log.Information($"{CharacterId}Add to map:{MapId}");
             model.CurrentMapId.Value = MapId;
 
             this.SendEvent(new WannaJoinMapEvent(MapId, CharacterId));

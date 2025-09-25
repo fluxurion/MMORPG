@@ -12,8 +12,8 @@ namespace MMORPG.Game
         [Required("The status name cannot be empty!")]
         public string Name = "TODO";
 
-        [Information("Actions中有报错还没处理!", InfoMessageType.Error, "CheckActionsHasError")]
-        [Information("Actions不能为空!", InfoMessageType.Error, "IsEmptyActions")]
+        [Information("Actions: There are errors that have not been processed yet!", InfoMessageType.Error, "CheckActionsHasError")]
+        [Information("Actions: cannot be empty!", InfoMessageType.Error, "IsEmptyActions")]
         [TabGroup("Actions")]
         [TableList(AlwaysExpanded = true)]
         public PlayerAction[] Actions;
@@ -22,8 +22,8 @@ namespace MMORPG.Game
         public bool HandleTransitionsScripts = false;
 
         [HideIf("HandleTransitionsScripts")]
-        [Information("Transitions中有报错还没处理!", InfoMessageType.Error, "CheckTransitionsHasError")]
-        [Information("Transitions不能为空!", InfoMessageType.Error, "IsEmptyTransitions")]
+        [Information("Transitions: There are errors that have not been processed yet!", InfoMessageType.Error, "CheckTransitionsHasError")]
+        [Information("Transitions: cannot be empty!", InfoMessageType.Error, "IsEmptyTransitions")]
         [TabGroup("Transitions")]
         [ListDrawerSettings(ShowIndexLabels = true, ListElementLabelName = "Label")]
         public PlayerTransition[] Transitions;

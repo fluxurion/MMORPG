@@ -36,9 +36,9 @@ namespace MMORPG.Game
 
         // public string StartStateName = string.Empty;
 
-        [Information("状态机中有报错还没处理!", InfoMessageType.Error, "CheckStatesHasError")]
-        [Information("空状态机是没有意义的!", InfoMessageType.Warning, "IsEmptyStates")]
-        [Information("不能有相同名称的状态!", InfoMessageType.Error, "HasRepeatStateName")]
+        [Information("There are errors in the state machine that have not been processed!", InfoMessageType.Error, "CheckStatesHasError")]
+        [Information("An empty state machine is meaningless!", InfoMessageType.Warning, "IsEmptyStates")]
+        [Information("There cannot be a state with the same name!", InfoMessageType.Error, "HasRepeatStateName")]
         [ListDrawerSettings(ShowIndexLabels = true, ListElementLabelName = "Name")]
         public PlayerState[] States;
 
@@ -69,7 +69,7 @@ namespace MMORPG.Game
                 {
                     var mine = this.GetSystem<IPlayerManagerSystem>().MineEntity;
                     if (mine == null)
-                        throw new Exception("Player还未初始化!");
+                        throw new Exception("Player: Not initialized yet!");
                     _isMine = mine.EntityId == ActorController.Entity.EntityId;
                 }
 
@@ -133,7 +133,7 @@ namespace MMORPG.Game
 #if UNITY_EDITOR
             if (CheckStatesHasError())
             {
-                UnityEditor.EditorUtility.DisplayDialog("错误", "Player的PlayerBrain中的状态机有错误还未处理!", "确定");
+                UnityEditor.EditorUtility.DisplayDialog("mistake", "Player of PlayerBrain The state machine in has an error that has not been handled!", "Sure");
                 UnityEditor.EditorApplication.isPlaying = false;
                 return;
             }
@@ -189,7 +189,7 @@ namespace MMORPG.Game
 
                 InputControls.Player.Pickup.started += context =>
                 {
-                    //TODO 捡起
+                    //TODO pick up
                     this.SendCommand(new PickupItemCommand());
                 };
             }
@@ -214,9 +214,9 @@ namespace MMORPG.Game
                     return;
                 }
 
-                UITipPanel.Content = $"你拾取了[{itemDefine.Name}] × {e.Resp.Amount}";
+                UITipPanel.Content = $"you picked it up[{itemDefine.Name}] × {e.Resp.Amount}";
 
-                //TODO 捡起成功后播放音效
+                //TODO Play sound effect after picking up successfully
                 SoundManager.Instance.PlayerPickItemAudio.Play();
             });
 

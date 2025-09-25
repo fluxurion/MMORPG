@@ -49,7 +49,7 @@ namespace MMORPG.Game
             }
             catch (Exception e)
             {
-                Log.Error(e, "退出程序时出现错误!");
+                Log.Error(e, "Error exiting the program!");
             }
             finally
             {

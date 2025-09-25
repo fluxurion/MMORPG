@@ -4,11 +4,11 @@ using UnityEngine;
 namespace MMORPG.Tool
 {
     /// <summary>
-    /// 旋转加载框的配置
+    /// Configuration of the rotating loading frame
     /// </summary>
     public record SpinnerBoxConfig
     {
-        public string Description = "我是一个旋转加载面板";
+        public string Description = "I am a rotating loading panel";
         public float DescriptionFontSize = 16;
     }
 
@@ -30,7 +30,7 @@ namespace MMORPG.Tool
         {
             if (IsShowing)
             {
-                Debug.LogWarning("当前SpinnerBox正在显示!");
+                Debug.LogWarning("The current SpinnerBox is showing!");
                 return;
             }
 

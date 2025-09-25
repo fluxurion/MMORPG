@@ -13,7 +13,7 @@ using MMORPG.Common.Proto.Entity;
 
         protected override void OnEnter()
         {
-            Log.Information($"{mTarget.ActorController.Entity.gameObject.name}死亡");
+            Log.Information($"{mTarget.ActorController.Entity.gameObject.name}die");
             if (mTarget.DeathFeedbacks != null)
             {
                 mTarget.DeathFeedbacks.Play();

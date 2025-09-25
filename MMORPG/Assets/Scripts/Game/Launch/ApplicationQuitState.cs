@@ -16,7 +16,7 @@ namespace MMORPG.Game
 
         protected override void OnEnter()
         {
-            Log.Information("程序退出");
+            Log.Information("Program exits");
             this.SendEvent(new ApplicationQuitEvent());
         }
 

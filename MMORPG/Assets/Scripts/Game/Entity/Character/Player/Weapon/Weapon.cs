@@ -28,17 +28,17 @@ namespace MMORPG.Game
         [FoldoutGroup("Id")]
         public int WeaponId;
         [FoldoutGroup("Use")]
-        [Tooltip("当WeaponInputStart或者TurnWeaponOn后经过多少时间正式WeaponUse")]
+        [Tooltip("How long after WeaponInputStart or TurnWeaponOn does the WeaponUse function start?")]
         public float DelayBeforeUse;
         [FoldoutGroup("Use")]
-        [Tooltip("类似冷却时间")]
+        [Tooltip("Similar cool down time")]
         public float TimeBetweenUses = 1f;
         [FoldoutGroup("Use")]
-        [Tooltip("SemiAuto: 当用完武器后就停止使用武器\nAuto: 当用完武器后继续使用武器, 直到手动调用WeaponInputStop或者TurnWeaponOff")]
+        [Tooltip("SemiAuto:Stop using weapons when you have used them up \n Auto: Continue using weapons after running out of them, Until WeaponInputStop or TurnWeaponOff is manually called")]
         public TriggerModes TriggerMode = TriggerModes.Auto;
 
         [FoldoutGroup("Movement")]
-        [Tooltip("当使用武器时阻止人物移动")]
+        [Tooltip("Prevents the character from moving when using a weapon")]
         public bool PreventAllMovementWhileInUse = false;
 
         [FoldoutGroup("Animator Parameter Names")]
@@ -77,7 +77,7 @@ namespace MMORPG.Game
         [FoldoutGroup("Settings")]
         public bool InitializeOnStart = false;
         [FoldoutGroup("Settings")]
-        [Tooltip("是否可以在武器使用时(包括冷却时)打断")]
+        [Tooltip("Is it possible to use the weapon when(including cooling)interrupt")]
         public bool Interruptible = false;
 
         public bool CanUse => FSM.CurrentStateId == WeaponStates.Idle && !PreventFire;
@@ -134,9 +134,9 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// <para>使用武器</para>
-        /// <para>1. 如果当前武器正在使用中, 会尝试打断(Interrupt)</para>
-        /// <para>2. 如果PreventFire为True, 会阻止使用</para>
+        /// <para>use weapons</para>
+        /// <para>1. If the current weapon is in use, it will try to interrupt it.</para>
+        /// <para>2. If PreventFire is True, it will prevent the use of</para>
         /// </summary>
         public virtual void WeaponInputStart()
         {
@@ -148,8 +148,8 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// <para>停止武器使用</para>
-        /// <para>会在当前武器使用完(包括冷却完成)后才停止</para>
+        /// <para>stop weapons use</para>
+        /// <para>Will stop after the current weapon is used up (including cooldown completion)</para>
         /// </summary>
         public virtual void WeaponInputStop()
         {
@@ -157,8 +157,8 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// <para>直接使用武器</para>
-        /// <para>Tip: 推荐使用WeaponInputStart</para>
+        /// <para>Use weapons directly</para>
+        /// <para>Tip: WeaponInputStart is recommended.</para>
         /// </summary>
         public virtual void TurnWeaponOn()
         {
@@ -173,8 +173,8 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// <para>强行停止武器使用</para>
-        /// <para>Tip: 推荐使用WeaponInputStop</para>
+        /// <para>Forced cessation of weapon use</para>
+        /// <para>Tip: WeaponInputStop is recommended</para>
         /// </summary>
         public virtual void TurnWeaponOff()
         {

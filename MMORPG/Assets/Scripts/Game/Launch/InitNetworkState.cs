@@ -14,7 +14,7 @@ namespace MMORPG.Game
 
         protected override async void OnEnter()
         {
-            Log.Information("初始化网络");
+            Log.Information("Initialize the network");
             var net = this.GetSystem<INetworkSystem>();
             await net.ConnectAsync();
             Task.Run(net.StartAsync);

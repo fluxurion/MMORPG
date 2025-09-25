@@ -22,7 +22,7 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// 发送攻击请求, 在响应成功后正式攻击
+        /// Send an attack request and formally attack after a successful response
         /// </summary>
         public async void Spell()
         {
@@ -54,7 +54,7 @@ namespace MMORPG.Game
                 }
                 else
                 {
-                    Log.Error($"攻击请求失败! 原因:{response.Reason}");
+                    Log.Error($"Attack request failed! Reason:{response.Reason}");
                 }
                 _prepareFire = false;
             }

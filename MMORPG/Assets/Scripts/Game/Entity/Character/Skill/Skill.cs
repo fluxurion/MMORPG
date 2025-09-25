@@ -62,7 +62,7 @@ namespace MMORPG.Game
             {
                 "Combo" => SkillModes.Combo,
                 "Skill" => SkillModes.Skill,
-                _ => throw new Exception("未知技能模式")
+                _ => throw new Exception("Unknown skill mode")
             };
         }
 
@@ -83,7 +83,7 @@ namespace MMORPG.Game
 
         public void Use(CastTarget target)
         {
-            Log.Debug($"{SkillManager.ActorController.Entity.EntityId}使用技能{Define.Name}");
+            Log.Debug($"{SkillManager.ActorController.Entity.EntityId}Use skills{Define.Name}");
             switch (Mode)
             {
                 case SkillModes.Combo:
@@ -100,7 +100,7 @@ namespace MMORPG.Game
         private void UseCombo(CastTarget target)
         {
             if (_handleWeapon == null)
-                throw new Exception($"Combo模式的技能({Define.Name})必须由持有PlayerHandleWeapon的对象释放!");
+                throw new Exception($"Combo Mode Skills({Define.Name})Must be released by the object holding the PlayerHandleWeapon!");
             _handleWeapon.CurrentComboWeapon.ChangeCombo(Define.ID);
             Debug.Assert(_handleWeapon.CurrentWeapon.WeaponId == Define.ID);
             _handleWeapon.CurrentWeapon.TurnWeaponOn();
@@ -112,12 +112,12 @@ namespace MMORPG.Game
             {
                 if (SkillManager.CurrentSpellingSkill != null)
                 {
-                    Log.Warning($"{SkillManager.ActorController.Entity.EntityId}尝试在释放技能({SkillManager.CurrentSpellingSkill.Define.Name})的时候使用其他技能:{Define.Name}");
+                    Log.Warning($"{SkillManager.ActorController.Entity.EntityId}Try to release skills({SkillManager.CurrentSpellingSkill.Define.Name})Use other skills when:{Define.Name}");
                     return;
                 }
                 if (CurrentState != States.Idle)
                 {
-                    Log.Warning($"{SkillManager.ActorController.Entity.EntityId}尝试使用正在冷却中的技能:{Define.Name}");
+                    Log.Warning($"{SkillManager.ActorController.Entity.EntityId}Try using a skill that is on cooldown:{Define.Name}");
                     return;
                 }
             }

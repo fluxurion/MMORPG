@@ -11,15 +11,15 @@ namespace MMORPG.Game
 {
     public class ComboWeapon : MonoBehaviour, IController, ICanSendEvent
     {
-        [Tooltip("启动连招切换")]
+        [Tooltip("Start combo switching")]
         public bool DroppableCombo = true;
-        [Tooltip("连招判定间隔, 超过则切回第一个连招")]
+        [Tooltip("Combo judgment interval, if exceeded, switch back to the first combo")]
         public float DropComboDelay = 1f;
-        [Tooltip("打完一整套连招后的冷却时间")]
+        [Tooltip("Cooldown time after completing a combo")]
         public float ComboCoolTime = 1f;
 
-        [Information("自动获取当前物体上所有的Weapon", GUIAlwaysEnabled = true)]
-        [Information("注意: 附加的每个Weapon不要启动\"InitializeOnStart\", 因为初始化是由ComboWeapon控制的!", InfoMessageType.Warning, GUIAlwaysEnabled = true)]
+        [Information("Automatically obtain all weapons on the current object", GUIAlwaysEnabled = true)]
+        [Information("Note: Do not activate each weapon attached\"InitializeOnStart\", Because initialization is controlled by ComboWeapon!", InfoMessageType.Warning, GUIAlwaysEnabled = true)]
         [ReadOnly]
         public Weapon[] Weapons;
 

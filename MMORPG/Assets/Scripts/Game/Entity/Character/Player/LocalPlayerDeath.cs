@@ -49,10 +49,10 @@ namespace MMORPG.Game
             var response = await _network.ReceiveAsync<ReviveResponse>();
             if (response.Error != NetError.Success)
             {
-                Log.Error($"复活失败, 原因:{response.Error}");
+                Log.Error($"Resurrection failed, reasons:{response.Error}");
                 return;
             }
-            Log.Information("复活成功");
+            Log.Information("Resurrection successful");
             OwnerState.Brain.ChangeStateByName("Idle");
         }
 

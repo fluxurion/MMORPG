@@ -1,16 +1,16 @@
 {
-  "1": {
-    "ID": 1,
-    "Name": "取得20个哥布林的爪子",
-    "Decs": "取得20个哥布林爪子",
-    "Requirement": "[{\"Type\":\"Collect\", \"ItemId\":1008, \"Number\":20}]",
-    "CompletionReward": 2
-  },
-  "2": {
-    "ID": 2,
-    "Name": "收集",
-    "Decs": "收集",
-    "Requirement": "[{\"Type\":\"Collect\", \"ItemId\":1, \"Number\":10}]",
-    "CompletionReward": 2
-  }
+    "1": {
+        "ID": 1,
+        "Name": "Obtain 20 Goblin Claws",
+        "Decs": "Obtain 20 Goblin Claws",
+        "Requirement": "[{\"Type\":\"Collect\", \"ItemId\":1008, \"Number\":20}]",
+        "CompletionReward": 2
+    },
+    "2": {
+        "ID": 2,
+        "Name": "collect",
+        "Decs": "collect",
+        "Requirement": "[{\"Type\":\"Collect\", \"ItemId\":1, \"Number\":10}]",
+        "CompletionReward": 2
+    }
 }

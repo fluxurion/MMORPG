@@ -9,11 +9,11 @@ namespace MMORPG.Game
     {
         [Title("Weapon")]
         [AssetsOnly]
-        [Tooltip("初始化时持有的武器")]
+        [Tooltip("Weapon held at initialization")]
         public Weapon InitialWeapon;
 
         [Title("Binding")]
-        [Tooltip("武器附加位置")]
+        [Tooltip("Weapon attachment position")]
         public Transform WeaponAttachment;
 
         public Weapon CurrentWeapon { get; private set; }
@@ -42,10 +42,10 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// 改变持有武器
+        /// Change weapons held
         /// </summary>
         /// <param name="newWeapon"></param>
-        /// <param name="combo">当前武器是否只是为了Combo切换</param>
+        /// <param name="combo">Is the current weapon only for combo switching?</param>
         public void ChangeWeapon(Weapon newWeapon, bool combo = false)
         {
             if (CurrentWeapon)
@@ -75,7 +75,7 @@ namespace MMORPG.Game
             {
                 CurrentWeapon = Instantiate(newWeapon);
 
-                // 如果不是Mine, 关闭Combo切换
+                // If it is not Mine, turn off the Combo switch
                 if (CurrentWeapon.TryGetComponent(out ComboWeapon comboWeapon))
                 {
                     if (!Brain.IsMine)
@@ -95,7 +95,7 @@ namespace MMORPG.Game
         }
 
         /// <summary>
-        /// 使用武器
+        /// use weapons
         /// </summary>
         public void ShootStart()
         {
