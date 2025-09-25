@@ -20,6 +20,12 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+  <None Update="Config.ini.dist">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AOI2\AOI2.csproj" />
