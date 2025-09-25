@@ -1,11 +1,19 @@
 [Database]
+; Hostname or IP address of the MySQL server
 Host=127.0.0.1
+; Port number for the MySQL server (default: 3306)
 Port=3306
+; Username for the database connection
 User=username
+; Password for the database connection
 Password=password
+; Name of the database to use
 DbName=mmorpg
 
 [Logging]
+; Minimum log level: Debug, Information, Warning, Error, Fatal
 Level=Information
+; Path and filename for the main log file (supports rolling by day)
 LogFile=Logs/log-.txt
+; Path and filename for database error logs
 DBErrorFile=DBErrors.log
