@@ -10,6 +10,7 @@ using GameServer.Manager;
 using Serilog;
 using GameServer.Db;
 using GameServer.Config;
+using System.IO;
 
 namespace GameServer
 {
@@ -31,6 +32,57 @@ namespace GameServer
         {
             Log.Information("[Server] Starting the server.");
 
+            EnsureConfigIniExists();
+
+            EnsureDBConnectSuccessful();
+
+            Log.Information("[Server] Start initializing Manager...");
+            UpdateManager.Instance.Start();
+            Log.Information("[Server] Manager initialization completed");
+
+            _serverSocket.Listen();
+            //_connectionCleanupTimer.Start();
+            while (true)
+            {
+                var socket = await _serverSocket.AcceptAsync();
+                Log.Information($"[Server] client connection:{socket.RemoteEndPoint}");
+                NetChannel channel = new(socket);
+                OnNewChannelConnection(channel);
+                Task.Run(channel.StartAsync);
+            }
+        }
+
+        /// <summary>
+        /// Ensures that Config.ini exists. If not, tries to rename Config.ini.dist to Config.ini.
+        /// </summary>
+        private void EnsureConfigIniExists()
+        {
+            const string configFile = "Config.ini";
+            const string distFile = "Config.ini.dist";
+
+            if (!File.Exists(configFile))
+            {
+                if (File.Exists(distFile))
+                {
+                    File.Move(distFile, configFile);
+                    Log.Information("[Server] {0} not found. {1} has been renamed to {0}.", configFile, distFile);
+                }
+                else
+                {
+                    Log.Error("[Server] Neither {0} nor {1} found. Please provide a configuration file.", configFile, distFile);
+                    Console.WriteLine($"[Server] {configFile} and {distFile} are missing. Please provide a configuration file.");
+                    Console.WriteLine("Press any key to exit...");
+                    Console.ReadKey();
+                    Environment.Exit(1);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Ensures that connection to the database is successful. If not, logs the error and exits the application.
+        /// </summary>
+        private void EnsureDBConnectSuccessful()
+        {
             // Database connection test
             try
             {
@@ -52,21 +104,6 @@ namespace GameServer
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 Environment.Exit(1);
-            }
-
-            Log.Information("[Server] Start initializing Manager...");
-            UpdateManager.Instance.Start();
-            Log.Information("[Server] Manager initialization completed");
-
-            _serverSocket.Listen();
-            //_connectionCleanupTimer.Start();
-            while (true)
-            {
-                var socket = await _serverSocket.AcceptAsync();
-                Log.Information($"[Server] client connection:{socket.RemoteEndPoint}");
-                NetChannel channel = new(socket);
-                OnNewChannelConnection(channel);
-                Task.Run(channel.StartAsync);
             }
         }
 
