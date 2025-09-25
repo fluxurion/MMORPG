@@ -78,7 +78,7 @@ namespace GameServer.MapSystem
         /// </summary>
         public void EntityEnter(Entity entity)
         {
-            Log.Information($"{entity}进入{entity.Map}");
+            Log.Information($"{entity}Enter{entity.Map}");
 
             entity.AoiEntity = _aoiWord.Enter(entity.EntityId, entity.Position.X, entity.Position.Y);
             
@@ -123,7 +123,7 @@ namespace GameServer.MapSystem
         /// </summary>
         public void EntityLeave(Entity entity)
         {
-            Log.Information($"{entity}离开{entity.Map}");
+            Log.Information($"{entity}leave{entity.Map}");
 
             // Broadcasts that the entity has left the scene to all characters that can observe it.
             // In fact, direct broadcast is broadcast to the entity that follows the current entity rather than the entity that follows the current entity.
