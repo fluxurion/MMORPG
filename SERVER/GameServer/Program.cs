@@ -14,12 +14,7 @@ namespace GameServer
     {
         static async Task Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.Async(a => a.Console())
-                .WriteTo.Async(a => a.File("Logs/log-.txt", rollingInterval: RollingInterval.Day))
-                .CreateLogger();
-
+            LoggerInitializer.ConfigureLogger();
 
             //var character = new DbCharacter("jj", 1, 1, 1, 1, 1, 1, 1, 1);
             //SqlDb.Connection.Insert(character).ExecuteAffrows();

@@ -4,3 +4,8 @@ Port=3306
 User=username
 Password=password
 DbName=mmorpg
+
+[Logging]
+Level=Information
+LogFile=Logs/log-.txt
+DBErrorFile=DBErrors.log
