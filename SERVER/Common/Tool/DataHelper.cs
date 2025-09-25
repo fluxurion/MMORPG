@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 
@@ -26,14 +28,49 @@ namespace MMORPG.Common.Tool
         {
             if (string.IsNullOrWhiteSpace(str))
                 return Array.Empty<float>();
-            return str[1..^1].Split(',').Select(float.Parse).ToArray();
+
+            str = str.Trim();
+
+            if ((str.StartsWith("[") && str.EndsWith("]")) ||
+                (str.StartsWith("(") && str.EndsWith(")")))
+            {
+                str = str[1..^1];
+            }
+
+            var parts = str.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            var result = new List<float>();
+
+            foreach (var p in parts)
+            {
+                if (float.TryParse(p.Trim(),
+                    System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out float value))
+                {
+                    result.Add(value);
+                }
+                else
+                {
+                    Console.WriteLine($"[ParseFloats] '{p}' cannot conver to float. Input: '{str}'");
+                }
+            }
+
+            return result.ToArray();
         }
 
         public static int[] ParseIntegers(string str)
         {
             if (string.IsNullOrWhiteSpace(str))
                 return Array.Empty<int>();
-            return str[1..^1].Split(',').Select(int.Parse).ToArray();
+
+            str = str.Trim();
+            if (str.StartsWith("[") && str.EndsWith("]"))
+                str = str[1..^1];
+
+            return str
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => int.Parse(s.Trim(), CultureInfo.InvariantCulture))
+                .ToArray();
         }
     }
 }
