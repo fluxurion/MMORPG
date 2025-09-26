@@ -6,7 +6,7 @@ namespace MMORPG.UI
 {
     public enum ChatChannelType
     {
-        Composite,
+        General,
         World,
         Map,
         Group
@@ -45,7 +45,7 @@ namespace MMORPG.UI
                 messageType,
                 message,
                 messageColor,
-                ChannelType == ChatChannelType.Composite);
+                ChannelType == ChatChannelType.General);
         }
     }
 }

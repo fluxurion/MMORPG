@@ -53,7 +53,7 @@ namespace MMORPG.UI
                 CurrentTabContent = CurrentTab.targetContent.GetComponent<UIChatTabContent>();
                 switch (CurrentTabContent.ChannelType)
                 {
-                    case ChatChannelType.Composite:
+                    case ChatChannelType.General:
                         TextChannel.SetText("General");
                         break;
                     case ChatChannelType.World:
@@ -84,7 +84,7 @@ namespace MMORPG.UI
 
                 var messageType = CurrentTabContent.ChannelType switch
                 {
-                    ChatChannelType.Composite => ChatMessageType.World,
+                    ChatChannelType.General => ChatMessageType.General,
                     ChatChannelType.World => ChatMessageType.World,
                     ChatChannelType.Map => ChatMessageType.Map,
                     ChatChannelType.Group => ChatMessageType.Group,
@@ -107,15 +107,15 @@ namespace MMORPG.UI
 
                 if (response.Error == NetError.Success)
                 {
-                    //如果是作弊指令
+                    //If it is a cheat command
                     if (isCmd)
                     {
-                        //TODO 作弊指令
+                        //TODO cheat instructions
                     }
                     else
                     {
                         var time = response.Timestamp.ToDateTime();
-                        if (CurrentTabContent.ChannelType == ChatChannelType.Composite)
+                        if (CurrentTabContent.ChannelType == ChatChannelType.General)
                         {
                             TabContentWorldChat.SubmitMessage(time, messageType, characterName, InputMessage.text, messageColor);
                             CurrentTabContent.SubmitMessage(time, messageType, characterName, InputMessage.text, messageColor);
@@ -130,7 +130,7 @@ namespace MMORPG.UI
                 }
                 else
                 {
-                    //TODO SubmitChatMessageResponse Error处理
+                    //TODO SubmitChatMessageResponse Error Handling
                 }
 
                 _isSendingMessage = false;

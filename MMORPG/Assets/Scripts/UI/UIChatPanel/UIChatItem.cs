@@ -8,6 +8,7 @@ namespace MMORPG.UI
 {
     public enum ChatMessageType
     {
+        General,
         World,
         Map,
         Group
@@ -34,6 +35,7 @@ namespace MMORPG.UI
             {
                 string typeStr = type switch
                 {
+                    ChatMessageType.General => "General",
                     ChatMessageType.World => "World",
                     ChatMessageType.Group => "Group",
                     ChatMessageType.Map => "Map",
