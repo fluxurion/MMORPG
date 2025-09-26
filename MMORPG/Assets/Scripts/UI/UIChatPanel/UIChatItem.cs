@@ -34,9 +34,9 @@ namespace MMORPG.UI
             {
                 string typeStr = type switch
                 {
-                    ChatMessageType.World => "世界",
-                    ChatMessageType.Group => "组队",
-                    ChatMessageType.Map => "地图",
+                    ChatMessageType.World => "World",
+                    ChatMessageType.Group => "Group",
+                    ChatMessageType.Map => "Map",
                     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
                 };
 

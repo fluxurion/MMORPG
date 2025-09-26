@@ -4,12 +4,12 @@ using UnityEngine.UI;
 namespace MMORPG.UI
 {
     /// <summary>
-    /// 全屏背景图片等比例拉伸自适应
+    /// Fullscreen background image proportionally scaled and adapted
     /// </summary>
     [ExecuteInEditMode]
     public class UIBackgroundAdjuster : MonoBehaviour
     {
-        // 图片原大小(压缩前的)
+        // Original image size (before compression)
         //public Vector2 textureOriginSize = new Vector2(1376, 920);
 
         private RectTransform rt;
@@ -22,7 +22,7 @@ namespace MMORPG.UI
             Scaler();
         }
 
-        // 初始化组件
+        // Initialize component
         void Initialize()
         {
             rt = GetComponent<RectTransform>();
@@ -30,7 +30,7 @@ namespace MMORPG.UI
             canvas = GetComponentInParent<Canvas>();
         }
 
-        // 适配
+        // Adaptation
         void Scaler()
         {
             if (canvas == null || bgImage == null)
@@ -39,18 +39,18 @@ namespace MMORPG.UI
                 return;
             }
 
-            // 当前画布尺寸
+            // Current canvas size
             Vector2 canvasSize = canvas.GetComponent<RectTransform>().sizeDelta;
-            // 当前画布尺寸长宽比
+            // Current canvas size aspect ratio
             float screenxyRate = canvasSize.x / canvasSize.y;
 
-            // 图片尺寸
+            // Image size
             float textureWidth = bgImage.mainTexture.width;
             float textureHeight = bgImage.mainTexture.height;
-            // 视频尺寸长宽比
+            // Video size aspect ratio
             float texturexyRate = textureWidth / textureHeight;
 
-            // 视频x偏长,需要适配y（下面的判断 '>' 改为 '<' 就是视频播放器的视频方式）
+            // Video x is too long, needs to be adjusted to y (change '>' to '<' in the following judgment to match the video player's video mode)
             if (texturexyRate > screenxyRate)
             {
                 int newSizeY = Mathf.CeilToInt(canvasSize.y);
@@ -65,7 +65,7 @@ namespace MMORPG.UI
             }
         }
 
-        // 在窗口大小变化时重新适配背景图片
+        // Resize the background image when the window size changes
         void OnRectTransformDimensionsChange()
         {
             Scaler();

@@ -97,7 +97,7 @@ namespace MMORPG.UI
             }
             else
             {
-                Log.Error($"技能释放请求失败! 原因:{response.Reason}");
+                Log.Error($"Skill release request failed! Reason:{response.Reason}");
             }
             SkillPanel.HasSkillRequestingSpell = false;
         }

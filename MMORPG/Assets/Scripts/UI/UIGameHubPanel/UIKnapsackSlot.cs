@@ -64,9 +64,9 @@ namespace MMORPG.UI
             };
 
             UIToolTip.AddTitle(UIItem.Item.Name, colorQuality);
-            UIToolTip.AddLine($"品质:");
+            UIToolTip.AddLine($"Quality:");
             UIToolTip.AddColumn(UIItem.Item.Define.Quality, colorQuality);
-            UIToolTip.AddLine($"数量:{UIItem.Amount}");
+            UIToolTip.AddLine($"Amount:{UIItem.Amount}");
         }
 
         protected override void OnHideTooltip()

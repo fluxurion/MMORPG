@@ -54,16 +54,16 @@ namespace MMORPG.UI
                 switch (CurrentTabContent.ChannelType)
                 {
                     case ChatChannelType.Composite:
-                        TextChannel.SetText("世界");
+                        TextChannel.SetText("General");
                         break;
                     case ChatChannelType.World:
-                        TextChannel.SetText("世界");
+                        TextChannel.SetText("World");
                         break;
                     case ChatChannelType.Map:
-                        TextChannel.SetText("地图");
+                        TextChannel.SetText("Map");
                         break;
                     case ChatChannelType.Group:
-                        TextChannel.SetText("组队");
+                        TextChannel.SetText("Group");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

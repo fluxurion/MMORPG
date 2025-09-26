@@ -19,7 +19,7 @@ namespace MMORPG.UI
 
         public void Interact()
         {
-            // 没有选项按钮才允许点击面板继续对话
+            // No option button is allowed to click on the panel to continue the conversation
             if (GroupOptionBox.childCount == 0)
             {
                 this.SendCommand(new InteractCommand(0));

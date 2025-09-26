@@ -31,7 +31,7 @@ namespace MMORPG.UI
             if (_reviving)
             {
                 _remainingReviveTime -= Time.deltaTime;
-                TextReviveTime.text = $"您已死亡, 复活时间:{_remainingReviveTime:0}s";
+                TextReviveTime.text = $"You have died, resurrection time:{_remainingReviveTime:0}s";
                 if (Mathf.Approximately(_remainingReviveTime, 0))
                 {
                     _reviving = false;

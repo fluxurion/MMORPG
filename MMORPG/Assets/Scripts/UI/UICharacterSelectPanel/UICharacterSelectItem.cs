@@ -26,7 +26,7 @@ namespace MMORPG.Game
             set
             {
                 _level = value;
-                TextLevel.SetText($"等级:{value}");
+                TextLevel.SetText($"Level:{value}");
             }
         }
 

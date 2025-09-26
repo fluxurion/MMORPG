@@ -9,10 +9,10 @@ using Serilog;
 
 namespace MMORPG.UI
 {
-	public class UICharacterCreatePanelData : UIPanelData
-	{
-	}
-	public partial class UICharacterCreatePanel : UIPanel, IController
+    public class UICharacterCreatePanelData : UIPanelData
+    {
+    }
+    public partial class UICharacterCreatePanel : UIPanel, IController
     {
         private INetworkSystem _network;
 
@@ -21,7 +21,7 @@ namespace MMORPG.UI
             _network = this.GetSystem<INetworkSystem>();
 
             _network.Receive<CharacterCreateResponse>(OnReceivedCharacterCreate)
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
         public void OnCreateCharacter()
@@ -37,7 +37,7 @@ namespace MMORPG.UI
             else
             {
                 var box = this.GetSystem<IBoxSystem>();
-                box.ShowNotification("人物名称必须在4-12字之间!");
+                box.ShowNotification("Character name must be between 4 and 12 characters!");
             }
         }
 
@@ -45,7 +45,7 @@ namespace MMORPG.UI
         {
             if (response.Error != NetError.Success)
             {
-                Log.Error($"创建人物时出现报错: {response.Error.GetInfo().Description}");
+                Log.Error($"Error occurred while creating character: {response.Error.GetInfo().Description}");
                 return;
             }
 
@@ -53,20 +53,20 @@ namespace MMORPG.UI
         }
 
         protected override void OnOpen(IUIData uiData = null)
-		{
-		}
-		
-		protected override void OnShow()
-		{
-		}
-		
-		protected override void OnHide()
-		{
-		}
-		
-		protected override void OnClose()
-		{
-		}
+        {
+        }
+
+        protected override void OnShow()
+        {
+        }
+
+        protected override void OnHide()
+        {
+        }
+
+        protected override void OnClose()
+        {
+        }
 
         public IArchitecture GetArchitecture()
         {
